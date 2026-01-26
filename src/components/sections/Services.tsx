@@ -11,7 +11,7 @@ const content = [
     content: (
       <div className="h-full w-full flex items-center justify-center text-white relative">
         <Image
-          src="/portfolio/services_1.png"
+          src="/services/services_1.png"
           width={300}
           height={300}
           className="h-full w-full object-cover"
@@ -29,7 +29,7 @@ const content = [
     content: (
       <div className="h-full w-full flex items-center justify-center text-white relative">
         <Image
-          src="/portfolio/services_2.png"
+          src="/services/services_2.png"
           width={300}
           height={300}
           className="h-full w-full object-cover"
@@ -47,7 +47,7 @@ const content = [
     content: (
       <div className="h-full w-full flex items-center justify-center text-white relative">
         <Image
-          src="/portfolio/services_3.png"
+          src="/services/services_3.png"
           width={300}
           height={300}
           className="h-full w-full object-cover"
@@ -65,7 +65,7 @@ const content = [
     content: (
       <div className="h-full w-full flex items-center justify-center text-white relative">
         <Image
-          src="/portfolio/services_4.png"
+          src="/services/services_4.png"
           width={300}
           height={300}
           className="h-full w-full object-cover"
