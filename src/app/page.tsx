@@ -26,10 +26,10 @@ export default function Page() {
           <Header />
           <Hero />
           <Mission />
+          <BrandMarquee />
           <ProjectsParallax />
           <Services />
           <Testimonials3D />
-          <BrandMarquee />
           <Footer />
         </main>
       )}
