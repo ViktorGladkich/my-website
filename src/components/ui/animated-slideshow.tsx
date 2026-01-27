@@ -166,6 +166,7 @@ export const HoverSliderImage = React.forwardRef<
   HTMLImageElement,
   HTMLMotionProps<"img"> & HoverSliderImageProps
 >(({ index, imageUrl, className, ...props }, ref) => {
+  // eslint-disable-line @typescript-eslint/no-unused-vars
   const { activeSlide } = useHoverSliderContext();
   return (
     <motion.img

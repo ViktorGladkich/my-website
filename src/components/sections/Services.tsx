@@ -5,6 +5,7 @@ import {
   HoverSliderImageWrap,
   TextStaggerHover,
 } from "@/components/ui/animated-slideshow";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const SLIDES = [
   {
@@ -48,47 +49,62 @@ export function Services() {
   return (
     <HoverSlider className="min-h-screen py-24 bg-black text-white relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10 w-full">
-        <h3 className="mb-2 text-purple-500 text-sm font-semibold tracking-[0.3em] uppercase">
-          / Our Services
-        </h3>
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-12">
-          Comprehensive
-          <br />
-          Digital Solutions
-        </h2>
+        <ScrollReveal variant="fadeUp" className="mb-12">
+          <h3 className="mb-2 text-purple-500 text-sm font-semibold tracking-[0.3em] uppercase">
+            / Unsere Leistungen
+          </h3>
+          <h2 className="text-3xl md:text-5xl font-bold text-white">
+            Umfassende
+            <br />
+            Digitale Lösungen
+          </h2>
+        </ScrollReveal>
 
         <div className="flex flex-wrap lg:flex-nowrap items-start justify-between gap-12 lg:gap-24 w-full">
           <div className="flex flex-col space-y-6 md:space-y-8 w-full lg:w-5/12">
             {SLIDES.map((slide, index) => (
-              <div key={slide.id} className="group flex flex-col space-y-1">
-                <TextStaggerHover
-                  index={index}
-                  className="cursor-pointer text-4xl md:text-6xl font-bold uppercase tracking-tighter hover:text-purple-400 transition-colors duration-300 w-fit"
-                  text={slide.title}
-                />
-                <p className="text-gray-500 text-sm md:text-base font-medium tracking-wide pl-1 group-hover:text-gray-300 transition-colors duration-300">
-                  {slide.subtitle}
-                </p>
-              </div>
+              <ScrollReveal
+                key={slide.id}
+                variant="fadeUp"
+                delay={index * 0.1}
+                className="w-full"
+              >
+                <div className="group flex flex-col space-y-1">
+                  <TextStaggerHover
+                    index={index}
+                    className="cursor-pointer text-4xl md:text-6xl font-bold uppercase tracking-tighter hover:text-purple-400 transition-colors duration-300 w-fit"
+                    text={slide.title}
+                  />
+                  <p className="text-gray-500 text-sm md:text-base font-medium tracking-wide pl-1 group-hover:text-gray-300 transition-colors duration-300">
+                    {slide.subtitle}
+                  </p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
 
           <div className="w-full lg:w-7/12 aspect-4/3 md:aspect-video lg:aspect-auto lg:h-[600px] relative">
-            <HoverSliderImageWrap className="w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-              {SLIDES.map((slide, index) => (
-                <div key={slide.id} className="w-full h-full">
-                  <HoverSliderImage
-                    index={index}
-                    imageUrl={slide.imageUrl}
-                    src={slide.imageUrl}
-                    alt={slide.title}
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-              ))}
-            </HoverSliderImageWrap>
+            <ScrollReveal
+              variant="scaleUp"
+              delay={0.2}
+              className="w-full h-full"
+            >
+              <HoverSliderImageWrap className="w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                {SLIDES.map((slide, index) => (
+                  <div key={slide.id} className="w-full h-full">
+                    <HoverSliderImage
+                      index={index}
+                      imageUrl={slide.imageUrl}
+                      src={slide.imageUrl}
+                      alt={slide.title}
+                      className="w-full h-full object-cover"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                ))}
+              </HoverSliderImageWrap>
+            </ScrollReveal>
           </div>
         </div>
       </div>

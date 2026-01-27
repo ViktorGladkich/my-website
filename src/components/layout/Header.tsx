@@ -16,7 +16,7 @@ import Link from "next/link";
 export const Header = () => {
   const navItems = [
     {
-      name: "Services",
+      name: "Leistungen",
       link: "/services",
     },
     {
@@ -24,11 +24,11 @@ export const Header = () => {
       link: "/portfolio",
     },
     {
-      name: "About",
+      name: "Über uns",
       link: "/about",
     },
     {
-      name: "Contact",
+      name: "Kontakt",
       link: "/contact",
     },
   ];
@@ -52,7 +52,7 @@ export const Header = () => {
                 as="button"
                 className="bg-white text-black hover:bg-gray-100 shadow-[0_0_24px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04),0_0_4px_rgba(34,42,53,0.08),0_16px_68px_rgba(47,48,55,0.05),0_1px_0_rgba(255,255,255,0.1)_inset]"
               >
-                Contact Us
+                Kontaktieren
               </NavbarButton>
             </Link>
           </div>
@@ -85,7 +85,7 @@ export const Header = () => {
             <div className="flex w-full flex-col gap-4 mt-4">
               <Link href="/contact" className="w-full">
                 <NavbarButton variant="primary" className="w-full">
-                  Contact Us
+                  Kontaktieren
                 </NavbarButton>
               </Link>
             </div>

@@ -6,13 +6,13 @@ import { SpiralAnimation } from "@/components/ui/spiral-animation";
 
 export const Preloader = ({ onFinish }: { onFinish: () => void }) => {
   // Determine loading text based on progress
-  const [loadingText, setLoadingText] = useState("Initializing Core...");
+  const [loadingText, setLoadingText] = useState("Kern initialisieren...");
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setLoadingText("Loading Assets..."), 1000),
-      setTimeout(() => setLoadingText("Preparing Experience..."), 2500),
-      setTimeout(() => setLoadingText("Welcome"), 3800),
+      setTimeout(() => setLoadingText("Assets laden..."), 1000),
+      setTimeout(() => setLoadingText("Erlebnis vorbereiten..."), 2500),
+      setTimeout(() => setLoadingText("Willkommen"), 3800),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -41,7 +41,7 @@ export const Preloader = ({ onFinish }: { onFinish: () => void }) => {
         >
           <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white text-center">
             INVERTA <br />
-            <span className="text-purple-400">Digital Agency</span>
+            <span className="text-purple-400">Digitalagentur</span>
           </h1>
         </motion.div>
 

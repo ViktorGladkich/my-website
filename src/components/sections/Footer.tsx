@@ -20,21 +20,21 @@ export function Footer() {
   // Footer link data
   const footerLinks = [
     {
-      title: "Services",
+      title: "Leistungen",
       links: [
-        { label: "Web Development", href: "/services" },
-        { label: "App Development", href: "/services" },
+        { label: "Webentwicklung", href: "/services" },
+        { label: "App-Entwicklung", href: "/services" },
         { label: "UI/UX Design", href: "/services" },
-        { label: "SMM Strategy", href: "/services" },
+        { label: "SMM Strategie", href: "/services" },
       ],
     },
     {
-      title: "Company",
+      title: "Unternehmen",
       links: [
-        { label: "About Us", href: "/about" },
+        { label: "Über uns", href: "/about" },
         { label: "Portfolio", href: "/portfolio" },
-        { label: "Contact", href: "/contact" },
-        { label: "Careers", href: "#", pulse: true },
+        { label: "Kontakt", href: "/contact" },
+        { label: "Karriere", href: "#", pulse: true },
       ],
     },
   ];
@@ -89,7 +89,7 @@ export function Footer() {
             <p className="text-sm leading-relaxed text-neutral-400">
               IT & Digital Service GbR.
               <br />
-              Crafting digital experiences that redefine markets.
+              Digitale Erlebnisse schaffen, die Märkte neu definieren.
             </p>
           </div>
 
@@ -120,7 +120,7 @@ export function Footer() {
           {/* Contact section */}
           <div>
             <h4 className="text-white text-lg font-semibold mb-6">
-              Contact Us
+              Kontaktieren Sie uns
             </h4>
             <ul className="space-y-4">
               {contactInfo.map((item, i) => (
@@ -165,7 +165,7 @@ export function Footer() {
           {/* Copyright */}
           <p className="text-center md:text-left text-neutral-500 text-xs">
             &copy; {new Date().getFullYear()} INVERTA IT & Digital Service GbR.
-            All rights reserved.
+            Alle Rechte vorbehalten.
           </p>
         </div>
       </div>

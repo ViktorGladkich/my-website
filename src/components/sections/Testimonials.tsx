@@ -3,51 +3,51 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Marquee } from "@/components/ui/3d-testimonials";
-
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 // Unique reviews data
 const testimonials = [
   {
     name: "Sarah Mayer",
     username: "@sarah",
-    body: "Inverta transformed our digital presence completely. Highly recommended!",
+    body: "Inverta hat unsere digitale Präsenz komplett transformiert. Sehr empfehlenswert!",
     img: "https://randomuser.me/api/portraits/women/32.jpg",
-    country: "🇩🇪 Germany",
+    country: "🇩🇪 Deutschland",
   },
   {
     name: "Marcus Weber",
     username: "@marcus",
-    body: "The 3D effects on the site are stunning. Great job team!",
+    body: "Die 3D-Effekte auf der Seite sind atemberaubend. Tolle Arbeit, Team!",
     img: "https://randomuser.me/api/portraits/men/85.jpg",
-    country: "🇦🇹 Austria",
+    country: "🇦🇹 Österreich",
   },
   {
     name: "Elena Rodriguez",
     username: "@elena",
-    body: "Professional, timely, and incredibly talented designers.",
+    body: "Professionell, pünktlich und unglaublich talentierte Designer.",
     img: "https://randomuser.me/api/portraits/women/53.jpg",
-    country: "🇪🇸 Spain",
+    country: "🇪🇸 Spanien",
   },
   {
     name: "James Wilson",
     username: "@james",
-    body: "Our conversion rates doubled after the redesign.",
+    body: "Unsere Konversionsraten haben sich nach dem Redesign verdoppelt.",
     img: "https://randomuser.me/api/portraits/men/33.jpg",
     country: "🇬🇧 UK",
   },
   {
     name: "Lucas Dubois",
     username: "@lucas",
-    body: "The best agency we have worked with in Europe.",
+    body: "Die beste Agentur, mit der wir in Europa zusammengearbeitet haben.",
     img: "https://randomuser.me/api/portraits/men/22.jpg",
-    country: "🇫🇷 France",
+    country: "🇫🇷 Frankreich",
   },
   {
     name: "Sophie Müller",
     username: "@sophie",
-    body: "SMM strategy is on point. Engagement is up 200%.",
+    body: "Die SMM-Strategie ist punktgenau. Das Engagement ist um 200% gestiegen.",
     img: "https://randomuser.me/api/portraits/women/45.jpg",
-    country: "🇩🇪 Germany",
+    country: "🇩🇪 Deutschland",
   },
 ];
 
@@ -84,17 +84,21 @@ function TestimonialCard({
   );
 }
 
+// ... existing code ...
+
 export function Testimonials3D() {
   return (
     <section className="py-24 bg-black overflow-hidden relative">
       <div className="container mx-auto px-4 mb-20 relative z-10 text-center">
-        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-6">
-          Client <span className="text-purple-500">Love</span>
-        </h2>
-        <p className="max-w-2xl mx-auto text-gray-400 text-sm md:text-base">
-          Dont just take our word for it. Here is what our partners across the
-          globe have to say about working with Inverta.
-        </p>
+        <ScrollReveal variant="fadeUp">
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-6">
+            Kunden <span className="text-purple-500">Liebe</span>
+          </h2>
+          <p className="max-w-2xl mx-auto text-gray-400 text-sm md:text-base">
+            Verlassen Sie sich nicht nur auf unser Wort. Hier ist, was unsere
+            Partner weltweit über die Zusammenarbeit mit Inverta sagen.
+          </p>
+        </ScrollReveal>
       </div>
 
       <div className="relative flex h-[600px] w-full flex-row items-center justify-center overflow-hidden gap-4 perspective-[1000px]">

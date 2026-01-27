@@ -31,7 +31,7 @@ export function BrandMarquee() {
         >
           <div className="flex items-center gap-10">
             <span className="text-8xl md:text-[8rem] font-black uppercase tracking-tighter text-white leading-none">
-              Identity
+              Identität
             </span>
             <div className="h-24 w-40 md:h-40 md:w-64 overflow-hidden rounded-2xl relative shrink-0 border border-white/10">
               <Image
@@ -43,10 +43,10 @@ export function BrandMarquee() {
               />
             </div>
             <span className="text-8xl md:text-[8rem] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-blue-500 leading-none">
-              Refining
+              Verfeinern
             </span>
             <span className="text-8xl md:text-[8rem] font-black uppercase tracking-tighter text-white stroke-text-white leading-none">
-              Building
+              Bauen
             </span>
             <div className="h-24 w-40 md:h-40 md:w-64 overflow-hidden rounded-2xl relative shrink-0 border border-white/10">
               <Image
@@ -58,7 +58,7 @@ export function BrandMarquee() {
               />
             </div>
             <span className="text-8xl md:text-[8rem] font-black uppercase tracking-tighter text-white/50 leading-none">
-              Future
+              Zukunft
             </span>
           </div>
         </motion.div>
@@ -85,7 +85,7 @@ export function BrandMarquee() {
               />
             </div>
             <span className="text-8xl md:text-[8rem] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-red-500 leading-none">
-              Agency
+              Agentur
             </span>
             <span className="text-8xl md:text-[8rem] font-black uppercase tracking-tighter text-white leading-none">
               Digital
@@ -95,12 +95,10 @@ export function BrandMarquee() {
 
         {/* Footer Logo & Text (Absolute positioning at bottom of sticky container for effect) */}
         <div className="absolute bottom-5 left-0 right-0 flex flex-col items-center justify-center gap-4 text-center opacity-80">
-          <div className="flex items-center justify-center ">
-       
-          </div>
+          <div className="flex items-center justify-center "></div>
           <p className="max-w-md text-sm md:text-base text-gray-300 font-light tracking-wide uppercase">
-            Where branding goes beyond visuals — it&apos;s about creating a
-            story that resonates.
+            Wo Branding über das Visuelle hinausgeht — es geht darum, eine
+            Geschichte zu schaffen, die berührt.
           </p>
         </div>
       </div>

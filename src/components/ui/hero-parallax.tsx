@@ -12,6 +12,7 @@ import Link from "next/link";
 // Header is imported but removed from usage to use HeroHeader instead.
 // import { Header } from "@/components/layout/Header";
 import { HoverBorderGradient } from "./hover-border-gradient";
+import { TypewriterEffectSmooth } from "./typewriter-effect";
 
 export const HeroParallax = ({
   products,
@@ -60,7 +61,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[300vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto perspective-1000 transform-3d bg-black"
+      className="h-[260vh] py-25 overflow-hidden antialiased relative flex flex-col self-auto perspective-1000 transform-3d bg-black"
     >
       <HeroHeader />
       <motion.div
@@ -106,32 +107,70 @@ export const HeroParallax = ({
 };
 
 export const HeroHeader = () => {
-  // Note: The user's example had a 'Header' component inside the parallax file.
-  // We strictly use the main project Header for navigation, but this specific sub-header
-  // is part of the Hero design. I will rename it to avoid conflict with the Layout Header.
-  // HOWEVER, the user said "Left only component hero... and menu".
-  // The visual menu is handled by the layout Header.
-  // This text part is the "Hero Text".
+  // Words for typewriter effect - German text - Line 1
+  const wordsLine1 = [
+    {
+      text: "INVERTA",
+      className: "text-white",
+    },
+  ];
+
+  // Words for typewriter effect - German text - Line 2
+  const wordsLine2 = [
+    {
+      text: "Digitalagentur",
+      className:
+        "bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500",
+    },
+  ];
+
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
-      <h1 className="text-2xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-neutral-400">
-        INVERTA <br /> Digital Agency
-      </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 text-neutral-400">
-        We build beautiful products with the latest technologies and frameworks.
-        We are a team of passionate developers and designers that love to build
-        amazing products.
-      </p>
+      <div className="flex flex-col items-start">
+        <TypewriterEffectSmooth
+          words={wordsLine1}
+          className="justify-start my-0"
+          cursorClassName="hidden"
+        />
+        <TypewriterEffectSmooth
+          words={wordsLine2}
+          className="justify-start my-0 -mt-4"
+          cursorClassName="bg-purple-500"
+        />
+      </div>
+      <motion.p
+        className="max-w-2xl text-base md:text-xl mt-8 text-neutral-400"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 3.5,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+      >
+        Wir entwickeln schöne Produkte mit den neuesten Technologien und
+        Frameworks. Wir sind ein Team aus leidenschaftlichen Entwicklern und
+        Designern, die es lieben, außergewöhnliche Produkte zu schaffen.
+      </motion.p>
 
-      <div className="flex justify-center md:justify-start mt-8">
+      <motion.div
+        className="flex justify-center md:justify-start mt-8"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 3.8,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+      >
         <HoverBorderGradient
           containerClassName="rounded-full"
           as="button"
-          className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 px-8 py-3"
+          className="bg-black text-white flex items-center space-x-2 px-8 py-3"
         >
-          <span className="font-semibold text-base">Get Started</span>
+          <span className="font-semibold text-base">Jetzt starten</span>
         </HoverBorderGradient>
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -156,7 +195,7 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className="group/product h-96 w-120 relative shrink-0"
+      className="group/product h-106 w-120 relative shrink-0"
     >
       <Link
         href={product.link}
