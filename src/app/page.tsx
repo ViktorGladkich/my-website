@@ -6,8 +6,11 @@ import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { Preloader } from "@/components/ui/Preloader";
 import { Mission } from "@/components/sections/Mission";
+import { ProjectsParallax } from "@/components/sections/ProjectsParallax";
 import { Services } from "@/components/sections/Services";
+import { Footer } from "@/components/sections/Footer";
 import { BrandMarquee } from "@/components/sections/BrandMarquee";
+import { Testimonials3D } from "@/components/sections/Testimonials";
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,8 +26,11 @@ export default function Page() {
           <Header />
           <Hero />
           <Mission />
+          <ProjectsParallax />
           <Services />
+          <Testimonials3D />
           <BrandMarquee />
+          <Footer />
         </main>
       )}
     </>

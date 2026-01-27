@@ -47,13 +47,12 @@ export const Header = () => {
           {/* Centered automatically by flex-1 in NavItems */}
           <div className="flex items-center gap-4">
             <Link href="/contact" passHref>
-              <NavbarButton variant="secondary" as="button">
+              <NavbarButton
+                variant="primary"
+                as="button"
+                className="bg-white text-black hover:bg-gray-100 shadow-[0_0_24px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04),0_0_4px_rgba(34,42,53,0.08),0_16px_68px_rgba(47,48,55,0.05),0_1px_0_rgba(255,255,255,0.1)_inset]"
+              >
                 Contact Us
-              </NavbarButton>
-            </Link>
-            <Link href="/portfolio" passHref>
-              <NavbarButton variant="primary" as="button">
-                View Work
               </NavbarButton>
             </Link>
           </div>

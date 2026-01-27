@@ -6,7 +6,7 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
@@ -93,20 +93,27 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
-        y: visible ? 0 : 0,
-        height: visible ? "50px" : "60px",
+        width: visible ? "60%" : "100%",
+        y: 0,
+        height: visible ? "60px" : "60px",
+        borderRadius: "50px",
+      }}
+      initial={{
+        width: "100%",
+        y: 0,
+        borderRadius: "50px",
       }}
       transition={{
         type: "spring",
         stiffness: 200,
         damping: 50,
+        mass: 1,
       }}
       style={{
-        minWidth: visible ? "600px" : "100%",
+        minWidth: visible ? "800px" : "100%",
       }}
       className={cn(
-        "relative z-60 mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
+        "relative z-60 mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start px-4 py-2 lg:flex transition-all duration-300 ease-in-out",
         visible && "bg-white/80 dark:bg-white/5",
         className,
       )}

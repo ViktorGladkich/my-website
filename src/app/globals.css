@@ -9,6 +9,26 @@
   /* Add simple 3d transform utilities that might be missing in default v4 if no plugin */
   --transform-style-preserve-3d: preserve-3d;
   --transform-style-flat: flat;
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
 }
 
 /* Custom CSS for 3D transforms since we don't have a 3d plugin */
