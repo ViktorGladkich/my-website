@@ -9,19 +9,20 @@ import {
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-// Header is imported but removed from usage to use HeroHeader instead.
-// import { Header } from "@/components/layout/Header";
+// HoverBorderGradient and TypewriterEffectSmooth are used for the main call-to-action area
 import { HoverBorderGradient } from "./hover-border-gradient";
 import { TypewriterEffectSmooth } from "./typewriter-effect";
 
 export const HeroParallax = ({
   products,
+  isLoading,
 }: {
   products: {
     title: string;
     link: string;
     thumbnail: string;
   }[];
+  isLoading: boolean;
 }) => {
   const firstRow = products.slice(0, 5);
   const secondRow = products.slice(5, 10);
@@ -32,7 +33,7 @@ export const HeroParallax = ({
     offset: ["start start", "end start"],
   });
 
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
+  const springConfig = { stiffness: 60, damping: 30, bounce: 100 };
 
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, 1000]),
@@ -63,7 +64,7 @@ export const HeroParallax = ({
       ref={ref}
       className="h-[260vh] py-25 overflow-hidden antialiased relative flex flex-col self-auto perspective-1000 transform-3d bg-black"
     >
-      <HeroHeader />
+      <HeroHeader isLoading={isLoading} />
       <motion.div
         style={{
           rotateX,
@@ -107,8 +108,8 @@ export const HeroParallax = ({
   );
 };
 
-export const HeroHeader = () => {
-  // Words for typewriter effect - German text - Line 1
+export const HeroHeader = ({ isLoading }: { isLoading: boolean }) => {
+  // Main title configuration
   const wordsLine1 = [
     {
       text: "INVERTA",
@@ -116,7 +117,7 @@ export const HeroHeader = () => {
     },
   ];
 
-  // Words for typewriter effect - German text - Line 2
+  // Subtitle with gradient effect
   const wordsLine2 = [
     {
       text: "Digitalagentur",
@@ -132,17 +133,19 @@ export const HeroHeader = () => {
           words={wordsLine1}
           className="justify-center md:justify-start my-0"
           cursorClassName="hidden"
+          waiting={isLoading}
         />
         <TypewriterEffectSmooth
           words={wordsLine2}
           className="justify-center md:justify-start my-0 -mt-2 md:-mt-4"
           cursorClassName="bg-purple-500"
+          waiting={isLoading}
         />
       </div>
       <motion.p
         className="max-w-2xl text-lg md:text-xl mt-6 md:mt-8 text-neutral-400 text-center md:text-left leading-relaxed"
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={isLoading ? { opacity: 0, y: 30 } : { opacity: 1, y: 0 }}
         transition={{
           duration: 0.8,
           delay: 3.5,
@@ -157,7 +160,7 @@ export const HeroHeader = () => {
       <motion.div
         className="flex justify-center md:justify-start mt-6 md:mt-8"
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={isLoading ? { opacity: 0, y: 30 } : { opacity: 1, y: 0 }}
         transition={{
           duration: 0.8,
           delay: 3.8,
@@ -200,7 +203,7 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className="group/product h-106 w-120 relative shrink-0"
+      className="group/product h-90 w-120 relative shrink-0"
     >
       <Link
         href={product.link}

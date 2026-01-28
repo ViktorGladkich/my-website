@@ -2,24 +2,29 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 export function BrandMarquee() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll progress of this specific section
-  // We make the section tall (300vh) to force a long scroll period
+  // Track scroll progress relative to this section
+  // Increased height (300vh) ensures a prolonged scroll experience
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Row 1 moves Left
-  // We move significantly further (-100%) to ensure all content scrolls through
-  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 20,
+    mass: 0.5,
+  });
 
-  // Row 2 moves Right
-  const x2 = useTransform(scrollYProgress, [0, 1], ["-50%", "0%"]);
+  // Row 1: Leftward movement
+  const x1 = useTransform(smoothProgress, [0, 1], ["0%", "-50%"]);
+
+  // Row 2: Rightward movement
+  const x2 = useTransform(smoothProgress, [0, 1], ["-50%", "0%"]);
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-black">

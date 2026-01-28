@@ -148,14 +148,20 @@
     border-color: var(--border);
     outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
   }
+  html,
   body {
     background-color: var(--background);
     color: var(--foreground);
     cursor: none; /* Hide default cursor */
   }
 
+  body {
+    overflow-x: clip; /* Safely hide overflow without breaking sticky */
+  }
+
   /* Restore cursor on touch devices not supporting hover to be safe, though 'none' usually ignored */
   @media (hover: none) {
+    html,
     body {
       cursor: auto;
     }

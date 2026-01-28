@@ -16,21 +16,19 @@ export default function Page() {
 
   return (
     <>
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {isLoading && <Preloader onFinish={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      {!isLoading && (
-        <main className="min-h-screen bg-black text-white selection:bg-purple-900 selection:text-white">
-          <Hero />
-          <Mission />
-          <BrandMarquee />
-          <Services />
-          <ProjectsParallax />
-          <Testimonials3D />
-          <Footer />
-        </main>
-      )}
+      <main className="min-h-screen bg-black text-white selection:bg-purple-900 selection:text-white overflow-x-clip">
+        <Hero isLoading={isLoading} />
+        <Mission />
+        <BrandMarquee />
+        <Services />
+        <ProjectsParallax />
+        <Testimonials3D />
+        <Footer />
+      </main>
     </>
   );
 }

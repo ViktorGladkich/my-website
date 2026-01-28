@@ -6,6 +6,7 @@ import {
   TextStaggerHover,
 } from "@/components/ui/animated-slideshow";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import Image from "next/image";
 
 const SLIDES = [
   {
@@ -91,12 +92,29 @@ export function Services() {
                   <p className="text-gray-500 text-sm md:text-base font-medium tracking-wide pl-1 group-hover:text-gray-300 transition-colors duration-300">
                     {slide.subtitle}
                   </p>
+
+                  {/* Mobile Image - Shown directly below text */}
+                  <div className="block lg:hidden w-full aspect-video rounded-xl overflow-hidden mt-6 relative border border-white/10">
+                    <ScrollReveal
+                      variant="scaleUp"
+                      delay={0.1}
+                      className="w-full h-full"
+                    >
+                      <Image
+                        src={slide.imageUrl}
+                        alt={slide.title}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </ScrollReveal>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
           </div>
 
-          <div className="w-full lg:w-7/12 aspect-4/3 md:aspect-video lg:aspect-auto lg:h-[600px] relative">
+          <div className="hidden lg:block w-full lg:w-7/12 aspect-4/3 md:aspect-video lg:aspect-auto lg:h-[600px] relative">
             <ScrollReveal
               variant="scaleUp"
               delay={0.2}

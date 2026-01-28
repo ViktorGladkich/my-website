@@ -22,6 +22,10 @@ export const CustomCursor = () => {
   const dotY = useSpring(mouseY, { damping: 50, stiffness: 1000 });
 
   useEffect(() => {
+    // Check for touch device/mobile
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) return;
+
     // Show cursor only after first move to prevent initial jump
     const moveMouse = (e: MouseEvent) => {
       mouseX.set(e.clientX);

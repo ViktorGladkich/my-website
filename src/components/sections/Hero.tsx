@@ -3,7 +3,7 @@
 import React from "react";
 import { HeroParallax } from "../ui/hero-parallax";
 
-export const Hero = () => {
+export const Hero = ({ isLoading }: { isLoading: boolean }) => {
   // INVERTA Portfolio Assets
   const products = [
     {
@@ -69,5 +69,5 @@ export const Hero = () => {
     },
   ];
 
-  return <HeroParallax products={products} />;
+  return <HeroParallax products={products} isLoading={isLoading} />;
 };

@@ -13,8 +13,8 @@ export const Preloader = ({ onFinish }: { onFinish: () => void }) => {
       setTimeout(() => setLoadingText("Assets laden..."), 1000),
       setTimeout(() => setLoadingText("Erlebnis vorbereiten..."), 2500),
       setTimeout(() => setLoadingText("Willkommen"), 3800),
-      // Auto-finish after 4 seconds
-      setTimeout(() => onFinish(), 4000),
+      // Auto-finish after 5.5 seconds
+      setTimeout(() => onFinish(), 5500),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onFinish]);
@@ -24,8 +24,8 @@ export const Preloader = ({ onFinish }: { onFinish: () => void }) => {
       className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-black overflow-hidden"
       initial={{ opacity: 1 }}
       exit={{
-        opacity: 0,
-        transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
+        y: "-100%",
+        transition: { duration: 1.6, ease: [0.76, 0, 0.24, 1] },
       }}
     >
       {/* Fullscreen Spiral Animation */}

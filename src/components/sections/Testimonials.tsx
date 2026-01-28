@@ -102,7 +102,7 @@ export function Testimonials3D() {
         </ScrollReveal>
       </div>
 
-      <div className="relative flex w-full flex-col items-center justify-center mt-8 md:mt-0 overflow-hidden">
+      <div className="relative flex w-full flex-col items-center justify-center mt-8 md:mt-0">
         {/* Device Container - Scales with width but maintains aspect ratio */}
         <div className="relative w-full max-w-7xl aspect-video flex items-center justify-center scale-[1.4] md:scale-100">
           {/* Monitor Image acting as background/frame */}

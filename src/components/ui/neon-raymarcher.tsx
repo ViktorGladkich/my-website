@@ -2,9 +2,7 @@
 
 import { FC, useMemo, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-// import { Plane } from "@react-three/drei";
 import * as THREE from "three";
-// import { Perf } from 'r3f-perf'
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -243,7 +241,7 @@ void main() {
     float diff = max(dot(normal, lightDir), 0.0);
     
     vec3 halfDir = normalize(lightDir + viewDir);
-    float spec = pow(max(dot(normal, halfDir), 0.0), 32.0); // Niższy exponent
+    float spec = pow(max(dot(normal, halfDir), 0.0), 32.0); // Lower exponent
     
     // Get iridescent base color
     vec3 iridescent = getIridescence(normal, viewDir, u_time);

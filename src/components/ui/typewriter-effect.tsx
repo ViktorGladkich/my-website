@@ -102,6 +102,7 @@ export const TypewriterEffectSmooth = ({
   words,
   className,
   cursorClassName,
+  waiting = false,
 }: {
   words: {
     text: string;
@@ -109,6 +110,7 @@ export const TypewriterEffectSmooth = ({
   }[];
   className?: string;
   cursorClassName?: string;
+  waiting?: boolean;
 }) => {
   // split text inside of words into array of characters
   const wordsArray = words.map((word) => {
@@ -147,10 +149,10 @@ export const TypewriterEffectSmooth = ({
           width: "0%",
         }}
         animate={{
-          width: "fit-content",
+          width: waiting ? "0%" : "fit-content",
         }}
         transition={{
-          duration: 2,
+          duration: 1.5,
           ease: "linear",
           delay: 1,
         }}

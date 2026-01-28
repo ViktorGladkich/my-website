@@ -4,7 +4,7 @@ import { FC } from "react";
 import Image from "next/image";
 
 // Types
-interface iCardItem {
+interface CardItem {
   title: string;
   description: string;
   tag: string;
@@ -14,19 +14,13 @@ interface iCardItem {
   textColor: string;
 }
 
-interface iCardProps extends Omit<iCardItem, "src" | "link" | "tag"> {
+interface CardProps extends Omit<CardItem, "src" | "link" | "tag"> {
   i: number;
   src: string;
 }
 
 // Components
-const Card: FC<iCardProps> = ({
-  title,
-  description,
-  color,
-  textColor,
-  src,
-}) => {
+const Card: FC<CardProps> = ({ title, description, textColor, src }) => {
   return (
     <div className="h-screen flex items-center justify-center sticky top-0 bg-black overflow-hidden">
       <div className="relative w-full h-full flex items-center justify-center container mx-auto px-4 py-8 md:py-12">
@@ -65,11 +59,11 @@ const Card: FC<iCardProps> = ({
  * CardSlide component displays a series of cards in a vertical scroll layout
  * Each card contains a title, description, and decorative elements
  */
-interface iCardSlideProps {
-  items: iCardItem[];
+interface CardSlideProps {
+  items: CardItem[];
 }
 
-const CardsParallax: FC<iCardSlideProps> = ({ items }) => {
+const CardsParallax: FC<CardSlideProps> = ({ items }) => {
   return (
     <div className="bg-black">
       {items.map((project, i) => {
@@ -79,4 +73,4 @@ const CardsParallax: FC<iCardSlideProps> = ({ items }) => {
   );
 };
 
-export { CardsParallax, type iCardItem };
+export { CardsParallax, type CardItem };
