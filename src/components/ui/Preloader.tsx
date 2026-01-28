@@ -13,9 +13,11 @@ export const Preloader = ({ onFinish }: { onFinish: () => void }) => {
       setTimeout(() => setLoadingText("Assets laden..."), 1000),
       setTimeout(() => setLoadingText("Erlebnis vorbereiten..."), 2500),
       setTimeout(() => setLoadingText("Willkommen"), 3800),
+      // Auto-finish after 4 seconds
+      setTimeout(() => onFinish(), 4000),
     ];
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [onFinish]);
 
   return (
     <motion.div
@@ -26,46 +28,22 @@ export const Preloader = ({ onFinish }: { onFinish: () => void }) => {
         transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
       }}
     >
-      {/* Background Spiral - Only for visual flare */}
-      <div className="absolute inset-0 opacity-60">
+      {/* Fullscreen Spiral Animation */}
+      <div className="absolute inset-0">
         <SpiralAnimation />
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 flex flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-8"
+      {/* Loading Text - positioned at bottom */}
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
+        <motion.p
+          key={loadingText}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="text-xs text-gray-400 uppercase tracking-[0.3em]"
         >
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white text-center">
-            INVERTA <br />
-            <span className="text-purple-400">Digitalagentur</span>
-          </h1>
-        </motion.div>
-
-        {/* Loading Indicator */}
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-48 h-px bg-gray-800 overflow-hidden relative">
-            <motion.div
-              className="absolute left-0 top-0 h-full bg-white"
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 4, ease: "easeInOut" }}
-              onAnimationComplete={onFinish}
-            />
-          </div>
-          <motion.p
-            key={loadingText}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="text-xs text-gray-500 uppercase tracking-[0.2em]"
-          >
-            {loadingText}
-          </motion.p>
-        </div>
+          {loadingText}
+        </motion.p>
       </div>
     </motion.div>
   );

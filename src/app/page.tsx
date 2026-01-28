@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { Preloader } from "@/components/ui/Preloader";
 import { Mission } from "@/components/sections/Mission";
@@ -23,12 +22,11 @@ export default function Page() {
 
       {!isLoading && (
         <main className="min-h-screen bg-black text-white selection:bg-purple-900 selection:text-white">
-          <Header />
           <Hero />
           <Mission />
           <BrandMarquee />
-          <ProjectsParallax />
           <Services />
+          <ProjectsParallax />
           <Testimonials3D />
           <Footer />
         </main>

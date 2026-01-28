@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { ArrowRight, Trophy, Quote, Star } from "lucide-react";
 import { useInView, useSpring, useMotionValue } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -21,7 +20,8 @@ function Counter({
     damping: 60,
     stiffness: 50,
   });
-  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  // Reduced margin to 0px for better mobile detection
+  const isInView = useInView(ref, { once: false, margin: "0px" });
 
   useEffect(() => {
     if (isInView) {
@@ -66,22 +66,27 @@ export function Mission() {
 
         {/* Bento Grid layout - 12 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-          {/* LEFT COLUMN (Image + Satisfied Strip) - Spans 4/12 */}
+          {/* LEFT COLUMN (Video + Satisfied Strip) - Spans 4/12 */}
           <div className="md:col-span-4 flex flex-col gap-4">
-            {/* 1. Large Image Card */}
+            {/* 1. Animated Gradient Card */}
             <ScrollReveal
               variant="scaleUp"
               delay={0.1}
               className="relative group overflow-hidden rounded-3xl bg-neutral-900 border border-white/10 flex-1 min-h-[400px]"
             >
               <div className="w-full h-full relative">
-                <Image
-                  src="/portfolio/mission_helmet.png"
-                  alt="Future Vision"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  unoptimized
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  preload="auto"
+                  poster="https://res.cloudinary.com/dcphhfemb/video/upload/f_jpg,q_auto,w_800/mission_gb3wnk.jpg"
+                  src="https://res.cloudinary.com/dcphhfemb/video/upload/q_auto,f_auto,w_1600,vc_auto/mission_gb3wnk.mp4"
                 />
+                {/* Overlay to ensure text readability if needed, though mostly for style */}
+                <div className="absolute inset-0 bg-black/20" />
               </div>
               <div className="absolute bottom-4 left-4">
                 <div className="bg-white/10 backdrop-blur-md rounded-full p-3 border border-white/20">
@@ -214,31 +219,6 @@ export function Mission() {
             </div>
           </div>
         </div>
-
-        {/* Footer Spectrum */}
-        <ScrollReveal
-          variant="fadeUp"
-          delay={0.5}
-          className="mt-20 text-center space-y-6"
-        >
-          <div className="flex justify-center">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={40}
-              height={40}
-              className="animate-spin-slow object-contain"
-              unoptimized
-            />
-          </div>
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-widest text-white">
-            Spektrum erweitern
-          </h2>
-          <p className="text-gray-400 text-sm md:text-base">
-            Wir beschränken uns nicht auf einen Stil oder ein Medium — wir leben
-            von Vielseitigkeit.
-          </p>
-        </ScrollReveal>
       </div>
     </section>
   );

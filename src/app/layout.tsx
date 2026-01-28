@@ -1,10 +1,8 @@
-import type { Metadata } from "next";
-import "./globals.css";
+"use client";
 
-export const metadata: Metadata = {
-  title: "INVERTA | Digital Agency",
-  description: "Premium Website Development and SMM Services in Germany",
-};
+import "./globals.css";
+import { Header } from "@/components/layout/Header";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
 export default function RootLayout({
   children,
@@ -12,8 +10,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className="antialiased bg-black text-white">{children}</body>
+    <html lang="de" className="dark">
+      <head>
+        <title>INVERTA | Digital Agency</title>
+        <meta
+          name="description"
+          content="Premium Website Development and SMM Services in Germany"
+        />
+      </head>
+      <body className="antialiased bg-black text-white">
+        <CustomCursor />
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

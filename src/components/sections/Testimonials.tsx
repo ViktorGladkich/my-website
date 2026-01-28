@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import NextImage from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Marquee } from "@/components/ui/3d-testimonials";
@@ -101,65 +102,78 @@ export function Testimonials3D() {
         </ScrollReveal>
       </div>
 
-      <div className="relative flex h-[600px] w-full flex-row items-center justify-center overflow-hidden gap-4 perspective-[1000px]">
-        <div
-          className="flex flex-row items-center gap-6 mx-auto"
-          style={{
-            transform:
-              "translateX(0px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-20deg) rotateZ(10deg)",
-          }}
-        >
-          {/* Vertical Marquee 1 */}
-          <Marquee
-            vertical
-            pauseOnHover
-            repeat={4}
-            className="[--duration:60s] w-60 md:w-72"
-          >
-            {testimonials.slice(0, 3).map((review) => (
-              <TestimonialCard key={review.username} {...review} />
-            ))}
-          </Marquee>
-          {/* Vertical Marquee 2 (Reverse) */}
-          <Marquee
-            vertical
-            pauseOnHover
-            reverse
-            repeat={4}
-            className="[--duration:50s] w-60 md:w-72"
-          >
-            {testimonials.slice(3, 6).map((review) => (
-              <TestimonialCard key={review.username} {...review} />
-            ))}
-          </Marquee>
-          {/* Vertical Marquee 3 */}
-          <Marquee
-            vertical
-            pauseOnHover
-            repeat={4}
-            className="[--duration:55s] w-60 md:w-72 hidden md:flex"
-          >
-            {testimonials.slice(0, 3).map((review) => (
-              <TestimonialCard key={review.username} {...review} />
-            ))}
-          </Marquee>
-          {/* Vertical Marquee 4 (Reverse) */}
-          <Marquee
-            vertical
-            pauseOnHover
-            reverse
-            repeat={4}
-            className="[--duration:65s] w-60 md:w-72 hidden xl:flex"
-          >
-            {testimonials.slice(3, 6).map((review) => (
-              <TestimonialCard key={review.username} {...review} />
-            ))}
-          </Marquee>
-        </div>
+      <div className="relative flex w-full flex-col items-center justify-center mt-8 md:mt-0 overflow-hidden">
+        {/* Device Container - Scales with width but maintains aspect ratio */}
+        <div className="relative w-full max-w-7xl aspect-video flex items-center justify-center scale-[1.4] md:scale-100">
+          {/* Monitor Image acting as background/frame */}
+          <div className="absolute inset-0 z-10 pointer-events-none">
+            <div className="relative w-full h-full">
+              <NextImage
+                alt="iMac Frame"
+                src="/monitor_frame.png"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
 
-        {/* Gradient overlays */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-linear-to-b from-black to-transparent z-10"></div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-black to-transparent z-10"></div>
+          {/* Screen Content - Positioned absolutely to fit into the screen area */}
+          {/* Note: Adjusted for iMac Chin (large bottom bezel) */}
+          <div className="absolute top-[3%] bottom-[30%] left-[16%] right-[15.4%] bg-neutral-950/90 z-20 overflow-hidden flex flex-col items-center justify-center rounded-sm border border-white/5 shadow-[0_0_50px_rgba(100,100,255,0.1)_inset]">
+            {/* Optional: Add a top bar for browser look */}
+            <div className="w-full h-4 bg-[#1a1a1a] flex items-center px-3 space-x-1.5 shrink-0 border-b border-white/5">
+              <div className="size-2 rounded-full bg-[#FF5F57]"></div>
+              <div className="size-2 rounded-full bg-[#FEBC2E]"></div>
+              <div className="size-2 rounded-full bg-[#28C840]"></div>
+              <div className="mx-auto text-[6px] md:text-[8px] text-gray-400 font-medium opacity-50">
+                inverta.io/reviews
+              </div>
+            </div>
+
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-black/50">
+              <div className="flex flex-row items-center gap-4 mx-auto scale-[0.56] md:scale-96 origin-center opacity-90">
+                {/* Vertical Marquee 1 */}
+                <Marquee
+                  vertical
+                  pauseOnHover
+                  repeat={4}
+                  className="[--duration:60s] w-60"
+                >
+                  {testimonials.slice(0, 3).map((review) => (
+                    <TestimonialCard key={review.username} {...review} />
+                  ))}
+                </Marquee>
+                {/* Vertical Marquee 2 (Reverse) */}
+                <Marquee
+                  vertical
+                  pauseOnHover
+                  reverse
+                  repeat={4}
+                  className="[--duration:50s] w-60"
+                >
+                  {testimonials.slice(3, 6).map((review) => (
+                    <TestimonialCard key={review.username} {...review} />
+                  ))}
+                </Marquee>
+                {/* Vertical Marquee 3 */}
+                <Marquee
+                  vertical
+                  pauseOnHover
+                  repeat={4}
+                  className="[--duration:70s] w-60 hidden md:flex"
+                >
+                  {testimonials.slice(0, 3).map((review) => (
+                    <TestimonialCard key={review.username} {...review} />
+                  ))}
+                </Marquee>
+              </div>
+              {/* Gradient overlays for the screen content */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-linear-to-b from-black to-transparent z-10"></div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-black to-transparent z-10"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

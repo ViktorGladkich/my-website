@@ -16,19 +16,19 @@ import Link from "next/link";
 export const Header = () => {
   const navItems = [
     {
-      name: "Leistungen",
+      name: "LEISTUNGEN",
       link: "/services",
     },
     {
-      name: "Portfolio",
+      name: "PORTFOLIO",
       link: "/portfolio",
     },
     {
-      name: "Über uns",
+      name: "ÜBER UNS",
       link: "/about",
     },
     {
-      name: "Kontakt",
+      name: "KONTAKT",
       link: "/contact",
     },
   ];

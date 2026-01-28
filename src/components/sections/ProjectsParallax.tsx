@@ -5,9 +5,10 @@ import { CardsParallax, type iCardItem } from "@/components/ui/scroll-cards";
 const projectItems: iCardItem[] = [
   {
     title: "BRANDING",
-    description: "Crafting distinct identities that resonate and endure.",
-    tag: "Identity",
-    src: "/branding_showcase.png",
+    description:
+      "Erschaffung einzigartiger Identitäten, die resonieren und Bestand haben.",
+    tag: "Identität",
+    src: "/project_branding.png",
     link: "#",
     color: "black",
     textColor: "white",
@@ -15,9 +16,9 @@ const projectItems: iCardItem[] = [
   {
     title: "WEB DESIGN",
     description:
-      "Building immersive digital experiences that captivate and convert.",
+      "Entwicklung immersiver digitaler Erlebnisse, die fesseln und konvertieren.",
     tag: "Digital",
-    src: "/web_design_showcase.png",
+    src: "/project_web.png",
     link: "#",
     color: "black",
     textColor: "white",
@@ -25,9 +26,9 @@ const projectItems: iCardItem[] = [
   {
     title: "MARKETING",
     description:
-      "Data-driven strategies that amplify reach and accelerate growth.",
-    tag: "Growth",
-    src: "/marketing_visualization.png",
+      "Datengetriebene Strategien, die Reichweite erhöhen und Wachstum beschleunigen.",
+    tag: "Wachstum",
+    src: "/project_marketing.png",
     link: "#",
     color: "black",
     textColor: "white",

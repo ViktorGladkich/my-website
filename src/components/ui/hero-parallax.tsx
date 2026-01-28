@@ -80,6 +80,7 @@ export const HeroParallax = ({
               product={product}
               translate={translateX}
               key={product.title}
+              priority={true}
             />
           ))}
         </motion.div>
@@ -125,21 +126,21 @@ export const HeroHeader = () => {
   ];
 
   return (
-    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
-      <div className="flex flex-col items-start">
+    <div className="max-w-7xl relative mx-auto py-20 md:pt-65 md:pb-0 px-4 w-full left-0 top-0 flex flex-col justify-center min-h-[70vh] md:min-h-0">
+      <div className="flex flex-col items-center md:items-start justify-center">
         <TypewriterEffectSmooth
           words={wordsLine1}
-          className="justify-start my-0"
+          className="justify-center md:justify-start my-0"
           cursorClassName="hidden"
         />
         <TypewriterEffectSmooth
           words={wordsLine2}
-          className="justify-start my-0 -mt-4"
+          className="justify-center md:justify-start my-0 -mt-2 md:-mt-4"
           cursorClassName="bg-purple-500"
         />
       </div>
       <motion.p
-        className="max-w-2xl text-base md:text-xl mt-8 text-neutral-400"
+        className="max-w-2xl text-lg md:text-xl mt-6 md:mt-8 text-neutral-400 text-center md:text-left leading-relaxed"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -154,7 +155,7 @@ export const HeroHeader = () => {
       </motion.p>
 
       <motion.div
-        className="flex justify-center md:justify-start mt-8"
+        className="flex justify-center md:justify-start mt-6 md:mt-8"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -166,9 +167,11 @@ export const HeroHeader = () => {
         <HoverBorderGradient
           containerClassName="rounded-full"
           as="button"
-          className="bg-black text-white flex items-center space-x-2 px-8 py-3"
+          className="bg-black text-white flex items-center space-x-2 px-8 py-4 md:py-3 cursor-pointer"
         >
-          <span className="font-semibold text-base">Jetzt starten</span>
+          <span className="font-semibold text-lg md:text-base">
+            Jetzt starten
+          </span>
         </HoverBorderGradient>
       </motion.div>
     </div>
@@ -178,6 +181,7 @@ export const HeroHeader = () => {
 export const ProductCard = ({
   product,
   translate,
+  priority = false,
 }: {
   product: {
     title: string;
@@ -185,6 +189,7 @@ export const ProductCard = ({
     thumbnail: string;
   };
   translate: MotionValue<number>;
+  priority?: boolean;
 }) => {
   return (
     <motion.div
@@ -208,6 +213,7 @@ export const ProductCard = ({
           className="object-cover object-top-left absolute h-full w-full inset-0 rounded-xl bg-gray-900"
           alt={product.title}
           unoptimized
+          priority={priority}
         />
       </Link>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none rounded-xl"></div>

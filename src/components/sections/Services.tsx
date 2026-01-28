@@ -49,15 +49,28 @@ export function Services() {
   return (
     <HoverSlider className="min-h-screen py-24 bg-black text-white relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10 w-full">
-        <ScrollReveal variant="fadeUp" className="mb-12">
-          <h3 className="mb-2 text-purple-500 text-sm font-semibold tracking-[0.3em] uppercase">
-            / Unsere Leistungen
-          </h3>
-          <h2 className="text-3xl md:text-5xl font-bold text-white">
-            Umfassende
-            <br />
-            Digitale Lösungen
-          </h2>
+        <ScrollReveal
+          variant="fadeUp"
+          className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8"
+        >
+          <div className="max-w-2xl">
+            <h3 className="mb-4 text-purple-500 text-sm font-semibold tracking-[0.3em] uppercase">
+              Unsere Leistungen
+            </h3>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight leading-none">
+              Umfassende
+              <br />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/50">
+                Digitale Lösungen
+              </span>
+            </h2>
+          </div>
+          <p className="max-w-md text-gray-400 text-base md:text-lg leading-relaxed md:text-right pb-2">
+            Wir transformieren komplexe Anforderungen in elegante digitale
+            Erlebnisse. Mit strategischem Denken, präzisem Design und modernster
+            Technologie schaffen wir Lösungen, die nicht nur funktionieren,
+            sondern begeistern.
+          </p>
         </ScrollReveal>
 
         <div className="flex flex-wrap lg:flex-nowrap items-start justify-between gap-12 lg:gap-24 w-full">

@@ -31,6 +31,36 @@
   }
 }
 
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
 /* Custom CSS for 3D transforms since we don't have a 3d plugin */
 .transform-3d {
   transform-style: preserve-3d;
@@ -121,5 +151,28 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
+    cursor: none; /* Hide default cursor */
+  }
+
+  /* Restore cursor on touch devices not supporting hover to be safe, though 'none' usually ignored */
+  @media (hover: none) {
+    body {
+      cursor: auto;
+    }
+  }
+}
+
+/* Ensure links and buttons also don't show the default cursor */
+a,
+button,
+[role="button"] {
+  cursor: none !important;
+}
+
+@media (hover: none) {
+  a,
+  button,
+  [role="button"] {
+    cursor: pointer !important;
   }
 }
