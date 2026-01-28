@@ -8,7 +8,7 @@ const projectItems: CardItem[] = [
     description:
       "Erschaffung einzigartiger Identitäten, die resonieren und Bestand haben.",
     tag: "Identität",
-    src: "/project_branding.png",
+    src: "/images/projects/project_branding.png",
     link: "#",
     color: "black",
     textColor: "white",
@@ -18,7 +18,7 @@ const projectItems: CardItem[] = [
     description:
       "Entwicklung immersiver digitaler Erlebnisse, die fesseln und konvertieren.",
     tag: "Digital",
-    src: "/project_web.png",
+    src: "/images/projects/project_web.png",
     link: "#",
     color: "black",
     textColor: "white",
@@ -28,7 +28,7 @@ const projectItems: CardItem[] = [
     description:
       "Datengetriebene Strategien, die Reichweite erhöhen und Wachstum beschleunigen.",
     tag: "Wachstum",
-    src: "/project_marketing.png",
+    src: "/images/projects/project_marketing.png",
     link: "#",
     color: "black",
     textColor: "white",

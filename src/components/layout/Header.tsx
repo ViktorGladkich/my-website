@@ -10,6 +10,8 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
+import { MenuVertical } from "@/components/ui/menu-vertical";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -72,21 +74,28 @@ export const Header = () => {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {navItems.map((item, idx) => (
-              <Link
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300 block w-full py-2"
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="flex w-full flex-col gap-4 mt-4">
+            <div onClick={() => setIsMobileMenuOpen(false)}>
+              <MenuVertical
+                menuItems={navItems.map((i) => ({
+                  label: i.name,
+                  href: i.link,
+                }))}
+                color="#a855f7" // Purple-500 from gradient
+                className="w-full px-0 py-2"
+              />
+            </div>
+            <div className="flex w-full flex-col gap-4 mt-8 px-8 pb-4">
               <Link href="/contact" className="w-full">
-                <NavbarButton variant="primary" className="w-full">
-                  Kontaktieren
-                </NavbarButton>
+                <HoverBorderGradient
+                  containerClassName="rounded-full w-full"
+                  as="button"
+                  className="bg-black text-white flex items-center justify-center space-x-2 px-8 py-4 w-full"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <span className="font-semibold text-lg uppercase tracking-widest">
+                    Kontaktieren
+                  </span>
+                </HoverBorderGradient>
               </Link>
             </div>
           </MobileNavMenu>

@@ -103,14 +103,12 @@ export function Testimonials3D() {
       </div>
 
       <div className="relative flex w-full flex-col items-center justify-center mt-8 md:mt-0">
-        {/* Device Container - Scales with width but maintains aspect ratio */}
         <div className="relative w-full max-w-7xl aspect-video flex items-center justify-center scale-[1.4] md:scale-100">
-          {/* Monitor Image acting as background/frame */}
           <div className="absolute inset-0 z-10 pointer-events-none">
             <div className="relative w-full h-full">
               <NextImage
                 alt="iMac Frame"
-                src="/monitor_frame.png"
+                src="/images/ui/monitor_frame.png"
                 fill
                 className="object-contain"
                 priority
@@ -118,10 +116,7 @@ export function Testimonials3D() {
             </div>
           </div>
 
-          {/* Screen Content - Positioned absolutely to fit into the screen area */}
-          {/* Note: Adjusted for iMac Chin (large bottom bezel) */}
           <div className="absolute top-[3%] bottom-[30%] left-[16%] right-[15.4%] bg-neutral-950/90 z-20 overflow-hidden flex flex-col items-center justify-center rounded-sm border border-white/5 shadow-[0_0_50px_rgba(100,100,255,0.1)_inset]">
-            {/* Optional: Add a top bar for browser look */}
             <div className="w-full h-4 bg-[#1a1a1a] flex items-center px-3 space-x-1.5 shrink-0 border-b border-white/5">
               <div className="size-2 rounded-full bg-[#FF5F57]"></div>
               <div className="size-2 rounded-full bg-[#FEBC2E]"></div>

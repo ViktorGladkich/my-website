@@ -9,7 +9,8 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -62,7 +63,10 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 
   return (
     <motion.div
-      className={cn("fixed inset-x-0 top-6 z-40 px-4 md:px-0", className)}
+      className={cn(
+        "fixed inset-x-0 top-2 md:top-6 z-40 px-4 md:px-0",
+        className,
+      )}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
@@ -197,23 +201,45 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
+  onClose,
 }: MobileNavMenuProps) => {
-  return (
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Wrap in timeout to avoid "synchronous setState in effect" lint/error
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.3, ease: "circOut" }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white px-4 py-8 shadow-[0_0_24px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04),0_0_4px_rgba(34,42,53,0.08),0_16px_68px_rgba(47,48,55,0.05),0_1px_0_rgba(255,255,255,0.1)_inset] dark:bg-neutral-950",
+            "fixed inset-0 z-50 flex h-dvh w-screen flex-col items-center justify-center overflow-hidden bg-black px-4 py-8",
             className,
           )}
         >
+          {/* Close Button positioned absolutely top-right */}
+          <div className="absolute top-6 right-6 z-50">
+            <IconX
+              size={32}
+              className="text-white cursor-pointer hover:scale-110 transition-transform"
+              onClick={onClose}
+            />
+          </div>
+
           {children}
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };
 
@@ -225,9 +251,13 @@ export const MobileNavToggle = ({
   onClick: () => void;
 }) => {
   return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
+    <IconX className="text-black dark:text-white" onClick={onClick} size={32} />
   ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+    <IconMenu2
+      className="text-black dark:text-white"
+      onClick={onClick}
+      size={32}
+    />
   );
 };
 

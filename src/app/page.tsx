@@ -10,6 +10,7 @@ import { Services } from "@/components/sections/Services";
 import { Footer } from "@/components/sections/Footer";
 import { BrandMarquee } from "@/components/sections/BrandMarquee";
 import { Testimonials3D } from "@/components/sections/Testimonials";
+import { CallToAction } from "@/components/sections/CallToAction";
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,13 +21,14 @@ export default function Page() {
         {isLoading && <Preloader onFinish={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      <main className="min-h-screen bg-black text-white selection:bg-purple-900 selection:text-white overflow-x-clip">
+      <main className="min-h-svh bg-black text-white selection:bg-purple-900 selection:text-white overflow-x-clip">
         <Hero isLoading={isLoading} />
         <Mission />
         <BrandMarquee />
         <Services />
         <ProjectsParallax />
         <Testimonials3D />
+        <CallToAction />
         <Footer />
       </main>
     </>

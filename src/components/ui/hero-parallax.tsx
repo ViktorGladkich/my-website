@@ -62,7 +62,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[260vh] py-25 overflow-hidden antialiased relative flex flex-col self-auto perspective-1000 transform-3d bg-black"
+      className="h-[260svh] py-25 overflow-hidden antialiased relative flex flex-col self-auto perspective-1000 transform-3d bg-black"
     >
       <HeroHeader isLoading={isLoading} />
       <motion.div
@@ -127,7 +127,7 @@ export const HeroHeader = ({ isLoading }: { isLoading: boolean }) => {
   ];
 
   return (
-    <div className="max-w-7xl relative mx-auto py-20 md:pt-65 md:pb-0 px-4 w-full left-0 top-0 flex flex-col justify-center min-h-[70vh] md:min-h-0">
+    <div className="max-w-7xl relative mx-auto py-20 md:pt-65 md:pb-0 px-4 w-full left-0 top-0 flex flex-col justify-center min-h-[70svh] md:min-h-0">
       <div className="flex flex-col items-center md:items-start justify-center">
         <TypewriterEffectSmooth
           words={wordsLine1}

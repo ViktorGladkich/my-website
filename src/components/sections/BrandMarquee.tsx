@@ -27,8 +27,8 @@ export function BrandMarquee() {
   const x2 = useTransform(smoothProgress, [0, 1], ["-50%", "0%"]);
 
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-black">
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center gap-10 md:gap-20 overflow-hidden">
+    <section ref={containerRef} className="relative h-[300svh] bg-black">
+      <div className="sticky top-0 h-svh w-full flex flex-col justify-center gap-10 md:gap-20 overflow-hidden">
         {/* Row 1 - Moves Left */}
         <motion.div
           style={{ x: x1 }}
@@ -40,7 +40,7 @@ export function BrandMarquee() {
             </span>
             <div className="h-16 w-28 md:h-40 md:w-64 overflow-hidden rounded-xl md:rounded-2xl relative shrink-0 border border-white/10">
               <Image
-                src="/marquee/marquee_texture_1.png"
+                src="/images/marquee/marquee_texture_1.png"
                 alt="Identity"
                 fill
                 className="object-cover"
@@ -55,7 +55,7 @@ export function BrandMarquee() {
             </span>
             <div className="h-16 w-28 md:h-40 md:w-64 overflow-hidden rounded-xl md:rounded-2xl relative shrink-0 border border-white/10">
               <Image
-                src="/marquee/marquee_3_laptop.png"
+                src="/images/marquee/marquee_3_laptop.png"
                 alt="Programming"
                 fill
                 className="object-cover"
@@ -82,7 +82,7 @@ export function BrandMarquee() {
             </span>
             <div className="h-16 w-28 md:h-40 md:w-64 overflow-hidden rounded-xl md:rounded-2xl relative shrink-0 border border-white/10">
               <Image
-                src="/marquee/marquee_texture_2.png"
+                src="/images/marquee/marquee_texture_2.png"
                 alt="Texture"
                 fill
                 className="object-cover"

@@ -49,7 +49,6 @@ export function Mission() {
   return (
     <section className="bg-black py-24 text-white">
       <div className="container mx-auto px-4">
-        {/* Header */}
         <ScrollReveal
           variant="fadeUp"
           className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6"
@@ -64,11 +63,8 @@ export function Mission() {
           </p>
         </ScrollReveal>
 
-        {/* Bento Grid layout - 12 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-          {/* LEFT COLUMN (Video + Satisfied Strip) - Spans 4/12 */}
           <div className="md:col-span-4 flex flex-col gap-4">
-            {/* 1. Animated Gradient Card */}
             <ScrollReveal
               variant="scaleUp"
               delay={0.1}
@@ -105,7 +101,6 @@ export function Mission() {
               </div>
             </ScrollReveal>
 
-            {/* 6. Satisfied Clients Strip (Made bigger p-6) */}
             <ScrollReveal
               variant="slideRight"
               delay={0.2}
@@ -132,11 +127,8 @@ export function Mission() {
             </ScrollReveal>
           </div>
 
-          {/* RIGHT COLUMN (Grid of 4 Cards) - Spans 8/12 */}
           <div className="md:col-span-8 flex flex-col gap-4">
-            {/* Row 1: Quote (Longer) + Awards */}
             <div className="flex flex-col md:flex-row gap-4 flex-1">
-              {/* 2. Quote Card (Wider ~60%) */}
               <ScrollReveal
                 variant="fadeUp"
                 delay={0.2}
@@ -154,7 +146,6 @@ export function Mission() {
                 </div>
               </ScrollReveal>
 
-              {/* 3. Awards Card (Narrower ~40%) */}
               <ScrollReveal
                 variant="scaleUp"
                 delay={0.3}
@@ -182,9 +173,7 @@ export function Mission() {
               </ScrollReveal>
             </div>
 
-            {/* Row 2: Retention + Blue (Longer) */}
             <div className="flex flex-col md:flex-row gap-4 flex-1">
-              {/* 4. Client Retention (Narrower ~35%) */}
               <ScrollReveal
                 variant="fadeUp"
                 delay={0.3}
@@ -199,7 +188,6 @@ export function Mission() {
                 </p>
               </ScrollReveal>
 
-              {/* 5. Blue Action Card (Wider ~65%) */}
               <ScrollReveal
                 variant="slideRight"
                 delay={0.4}
