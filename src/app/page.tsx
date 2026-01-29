@@ -9,6 +9,7 @@ import { ProjectsParallax } from "@/components/sections/ProjectsParallax";
 import { Services } from "@/components/sections/Services";
 import { Footer } from "@/components/sections/Footer";
 import { BrandMarquee } from "@/components/sections/BrandMarquee";
+import { AboutStory } from "@/components/sections/AboutStory";
 import { Testimonials3D } from "@/components/sections/Testimonials";
 import { CallToAction } from "@/components/sections/CallToAction";
 
@@ -27,6 +28,7 @@ export default function Page() {
         <BrandMarquee />
         <Services />
         <ProjectsParallax />
+        <AboutStory />
         <Testimonials3D />
         <CallToAction />
         <Footer />

@@ -272,7 +272,7 @@ export const NavbarLogo = () => {
         alt="INVERTA Logo"
         width={130}
         height={50}
-        className="h-15 md:h-18 w-auto object-contain"
+        className="h-15 md:h-15 w-auto object-contain"
         priority
       />
     </Link>

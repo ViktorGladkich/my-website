@@ -122,7 +122,7 @@ export function Testimonials3D() {
               <div className="size-2 rounded-full bg-[#FEBC2E]"></div>
               <div className="size-2 rounded-full bg-[#28C840]"></div>
               <div className="mx-auto text-[6px] md:text-[8px] text-gray-400 font-medium opacity-50">
-                inverta.io/reviews
+                inverta.de/reviews
               </div>
             </div>
 

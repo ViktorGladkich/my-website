@@ -75,7 +75,7 @@ export function Footer() {
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center p-1">
                 <Image
-                  src="/images/ui/logo.png"
+                  src="/logo.png"
                   alt="Inverta Logo"
                   width={32}
                   height={32}
