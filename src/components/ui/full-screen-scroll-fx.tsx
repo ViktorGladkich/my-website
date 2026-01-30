@@ -126,7 +126,10 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
   ({ sections, className, onIndexChange, initialIndex = 0, apiRef }, ref) => {
     const [currentIndex, setCurrentIndex] = useState(initialIndex);
     const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll();
+    const { scrollYProgress } = useScroll({
+      target: containerRef,
+      offset: ["start start", "end end"],
+    });
 
     // Smooth spring for progress bar
     const smoothProgress = useSpring(scrollYProgress, {
@@ -175,8 +178,11 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
     return (
       <div
         ref={ref}
-        className={cn("relative w-full", className)}
-        style={{ height: `${sections.length * 100}vh` }} // Make the page tall enough to scroll
+        className={cn(
+          "relative w-full [--vh-multiplier:85vh] md:[--vh-multiplier:100vh]",
+          className,
+        )}
+        style={{ height: `calc(var(--vh-multiplier) * ${sections.length})` }} // Make the page tall enough to scroll
       >
         <div
           ref={containerRef}

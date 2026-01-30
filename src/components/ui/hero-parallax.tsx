@@ -128,22 +128,22 @@ export const HeroHeader = ({ isLoading }: { isLoading: boolean }) => {
 
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:pt-65 md:pb-0 px-4 w-full left-0 top-0 flex flex-col justify-center min-h-[70svh] md:min-h-0">
-      <div className="flex flex-col items-center md:items-start justify-center">
+      <div className="flex flex-col items-start justify-center">
         <TypewriterEffectSmooth
           words={wordsLine1}
-          className="justify-center md:justify-start my-0"
+          className="justify-start my-0"
           cursorClassName="hidden"
           waiting={isLoading}
         />
         <TypewriterEffectSmooth
           words={wordsLine2}
-          className="justify-center md:justify-start my-0 -mt-2 md:-mt-4"
+          className="justify-start my-0 -mt-2 md:-mt-4"
           cursorClassName="bg-purple-500"
           waiting={isLoading}
         />
       </div>
       <motion.p
-        className="max-w-2xl text-lg md:text-xl mt-6 md:mt-8 text-neutral-400 text-center md:text-left leading-relaxed"
+        className="max-w-2xl text-lg md:text-xl mt-6 md:mt-8 text-neutral-400 text-left leading-relaxed"
         initial={{ opacity: 0, y: 30 }}
         animate={isLoading ? { opacity: 0, y: 30 } : { opacity: 1, y: 0 }}
         transition={{
@@ -158,7 +158,7 @@ export const HeroHeader = ({ isLoading }: { isLoading: boolean }) => {
       </motion.p>
 
       <motion.div
-        className="flex justify-center md:justify-start mt-6 md:mt-8"
+        className="flex justify-start mt-6 md:mt-8"
         initial={{ opacity: 0, y: 30 }}
         animate={isLoading ? { opacity: 0, y: 30 } : { opacity: 1, y: 0 }}
         transition={{

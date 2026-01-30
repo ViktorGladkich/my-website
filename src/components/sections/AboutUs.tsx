@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import {
   Rocket,
   LayoutTemplate,
@@ -9,375 +10,283 @@ import {
   Share2,
   Gauge,
   Zap,
-  CheckCircle2,
-  Trophy,
-  Users,
-  Timer,
 } from "lucide-react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useInView,
-  useSpring,
-  Variants,
-} from "framer-motion";
-import Image from "next/image";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
+// Types
+type ServiceCategory = "web" | "marketing" | "design";
+
+interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  category: ServiceCategory;
+  icon: React.ElementType;
+  gradient: string;
+  image: string;
+}
+
+// Data - German Content with Images
+const serviceItems: ServiceItem[] = [
+  {
+    id: "1",
+    title: "Website & Onlineshop",
+    description:
+      "Maßgeschneiderte Webauftritte und E-Commerce Lösungen, die konvertieren. Von Landingpages bis zu komplexen Shopsystemen.",
+    category: "web",
+    icon: LayoutTemplate,
+    gradient: "from-purple-500 to-indigo-600",
+    image: "/images/services/service_web_real.png",
+  },
+  {
+    id: "4",
+    title: "SEO & Sichtbarkeit",
+    description:
+      "Suchmaschinenoptimierung für nachhaltiges organisches Wachstum. Werden Sie gefunden, wenn es darauf ankommt.",
+    category: "marketing",
+    icon: Search,
+    gradient: "from-orange-400 to-red-500",
+    image: "/images/services/service_seo_real_placeholder.png",
+  },
+  {
+    id: "2",
+    title: "Programmierung",
+    description:
+      "Individuelle Softwarelösungen und saubere Code-Strukturen für Ihr Business. React, Next.js, Node.js Experten.",
+    category: "web",
+    icon: Terminal,
+    gradient: "from-blue-400 to-cyan-500",
+    image: "/images/services/service_coding_real.png",
+  },
+  {
+    id: "5",
+    title: "Social Media",
+    description:
+      "Strategisches Social Media Marketing und Community Management. Bauen Sie eine echte Beziehung zu Ihrer Zielgruppe auf.",
+    category: "marketing",
+    icon: Share2,
+    gradient: "from-pink-500 to-rose-500",
+    image: "/images/services/service_social_real_placeholder.png",
+  },
+  {
+    id: "6",
+    title: "Performance",
+    description:
+      "Ladezeitoptimierung und kontinuierlicher Support für maximale Leistung. High-End Hosting und Wartung.",
+    category: "web",
+    icon: Gauge,
+    gradient: "from-emerald-400 to-green-600",
+    image: "/images/services/service_performance_real_placeholder.png",
+  },
+  {
+    id: "3",
+    title: "Relaunch & Funnels",
+    description:
+      "Modernisierung bestehender Systeme und verkaufspsychologische Funnelsysteme für maximalen Umsatz.",
+    category: "marketing",
+    icon: Rocket,
+    gradient: "from-amber-400 to-orange-600",
+    image: "/images/services/service_relaunch_real_placeholder.jpg",
+  },
+];
+
 export function AboutUsSection() {
+  const [activeCard, setActiveCard] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
-  const isStatsInView = useInView(statsRef, { once: false, amount: 0.3 });
-
-  // Parallax effect for decorative elements
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 20]);
-  const rotate2 = useTransform(scrollYProgress, [0, 1], [0, -20]);
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  const webServices = [
-    {
-      icon: <LayoutTemplate className="w-6 h-6" />,
-      title: "Website & Onlineshop",
-      description:
-        "Maßgeschneiderte Webauftritte und E-Commerce Lösungen, die konvertieren.",
-    },
-    {
-      icon: <Rocket className="w-6 h-6" />,
-      title: "Relaunch & Funnels",
-      description:
-        "Modernisierung bestehender Systeme und verkaufspsychologische Funnelsysteme.",
-    },
-    {
-      icon: <Terminal className="w-6 h-6" />,
-      title: "Programmierung",
-      description:
-        "Individuelle Softwarelösungen und saubere Code-Strukturen für Ihr Business.",
-    },
-  ];
-
-  const marketingServices = [
-    {
-      icon: <Search className="w-6 h-6" />,
-      title: "SEO & Sichtbarkeit",
-      description:
-        "Suchmaschinenoptimierung für nachhaltiges organisches Wachstum.",
-    },
-    {
-      icon: <Share2 className="w-6 h-6" />,
-      title: "Social Media",
-      description:
-        "Strategisches Social Media Marketing und Community Management.",
-    },
-    {
-      icon: <Gauge className="w-6 h-6" />,
-      title: "Performance",
-      description:
-        "Ladezeitoptimierung und kontinuierlicher Support für maximale Leistung.",
-    },
-  ];
-
-  const stats = [
-    { icon: <CheckCircle2 />, value: 150, label: "Projekte", suffix: "+" },
-    { icon: <Users />, value: 98, label: "Zufriedenheit", suffix: "%" },
-    { icon: <Timer />, value: 12, label: "Jahre Erfahrung", suffix: "" },
-    { icon: <Trophy />, value: 24, label: "Awards", suffix: "" },
-  ];
 
   return (
     <section
-      id="about-section"
       ref={sectionRef}
-      className="w-full py-24 px-4 bg-black text-white overflow-hidden relative"
+      className="relative bg-black text-white w-full py-24"
     >
-      {/* Decorative background elements - Adapted for Dark Mode */}
-      <motion.div
-        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-500/10 blur-3xl pointer-events-none"
-        style={{ y: y1, rotate: rotate1 }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"
-        style={{ y: y2, rotate: rotate2 }}
-      />
-
-      {/* Floating particles */}
-      <motion.div
-        className="absolute top-1/2 left-1/4 w-2 h-2 rounded-full bg-purple-500/30"
-        animate={{
-          y: [0, -15, 0],
-          opacity: [0.5, 1, 0.5],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-      />
-
-      <motion.div
-        className="container mx-auto max-w-7xl relative z-10"
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={containerVariants}
-      >
-        <motion.div
-          className="flex flex-col items-center mb-16"
-          variants={itemVariants}
+      {/* Header */}
+      <div className="container mx-auto px-4 text-center mb-24 md:mb-32">
+        <motion.span
+          className="text-purple-400 font-medium mb-4 flex items-center justify-center gap-2 uppercase tracking-wider text-sm"
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
         >
-          <motion.span
-            className="text-purple-400 font-medium mb-4 flex items-center gap-2 uppercase tracking-wider text-sm"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Zap className="w-4 h-4" />
-            VON DER VISION ZUR REALITÄT
-          </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center bg-clip-text text-transparent bg-linear-to-b from-white to-white/60">
-            Unsere Expertise
-          </h2>
-          <motion.div
-            className="w-24 h-1 bg-linear-to-r from-purple-500 to-blue-500 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: 96 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
-        </motion.div>
+          <Zap className="w-4 h-4" />
+          VON DER VISION ZUR REALITÄT
+        </motion.span>
+        <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-white/60">
+          Unsere Expertise
+        </h2>
+        <p className="max-w-3xl mx-auto text-neutral-400 text-lg leading-relaxed mt-4">
+          Wir sind ein Team aus digitalen Architekten und Strategen. Entdecken
+          Sie unser Universum an Dienstleistungen.
+        </p>
+      </div>
 
-        <motion.p
-          className="text-center max-w-3xl mx-auto mb-20 text-neutral-400 text-lg leading-relaxed"
-          variants={itemVariants}
-        >
-          Wir sind ein Team aus digitalen Architekten und Strategen. Wir
-          verbinden technologische Exzellenz mit kreativem Marketing, um Marken
-          nicht nur sichtbar, sondern unvergesslich zu machen.
-        </motion.p>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative items-center">
-          {/* Left Column - Webentwicklung */}
-          <div className="space-y-12 order-2 lg:order-1">
-            <h3 className="text-2xl font-bold text-center lg:text-right mb-8 text-neutral-200 uppercase tracking-widest hidden lg:block">
-              Webentwicklung
-            </h3>
-            {webServices.map((service, index) => (
-              <ServiceItem
-                key={`web-${index}`}
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-                variants={itemVariants}
-                delay={index * 0.2}
-                direction="left"
-              />
-            ))}
-          </div>
-
-          {/* Center Image */}
-          <div className="flex justify-center items-center order-1 lg:order-2 mb-12 lg:mb-0 relative">
-            <motion.div
-              className="relative w-full max-w-sm aspect-3/4"
-              variants={itemVariants}
-            >
-              <motion.div
-                className="absolute inset-0 bg-linear-to-tr from-purple-500/20 to-blue-500/20 rounded-2xl transform rotate-3"
-                initial={{ opacity: 0, rotate: 0 }}
-                animate={{ opacity: 1, rotate: 3 }}
-                transition={{ duration: 1, delay: 0.4 }}
-              />
-              <motion.div
-                className="relative rounded-2xl overflow-hidden shadow-2xl h-full border border-white/10"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+      {/* 3-Column Layout */}
+      <div className="container mx-auto px-4">
+        {/* Mobile: Simple Stack */}
+        <div className="md:hidden flex flex-col gap-12">
+          {serviceItems.map((item) => (
+            <div key={item.id} className="relative group">
+              <div
+                className={cn(
+                  "w-full h-64 rounded-2xl mb-6 flex items-center justify-center overflow-hidden relative border border-white/10",
+                  item.gradient,
+                )}
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
-                  alt="Digital Technology"
+                  src={item.image}
+                  alt={item.title}
                   fill
-                  className="object-cover"
+                  className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex items-end justify-center p-6"></div>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Right Column - Marketing */}
-          <div className="space-y-12 order-3">
-            <h3 className="text-2xl font-bold text-center lg:text-left mb-8 text-neutral-200 uppercase tracking-widest hidden lg:block">
-              Marketing
-            </h3>
-            {marketingServices.map((service, index) => (
-              <ServiceItem
-                key={`marketing-${index}`}
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-                variants={itemVariants}
-                delay={index * 0.2}
-                direction="right"
-              />
-            ))}
-          </div>
+                {React.createElement(item.icon, {
+                  className:
+                    "w-16 h-16 text-white relative z-10 drop-shadow-lg",
+                })}
+              </div>
+              <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+              <p className="text-neutral-400">{item.description}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Stats Section */}
-        <motion.div
-          ref={statsRef}
-          className="mt-32 grid grid-cols-2 lg:grid-cols-4 gap-8"
-          initial="hidden"
-          animate={isStatsInView ? "visible" : "hidden"}
-          variants={containerVariants}
-        >
-          {stats.map((stat, index) => (
-            <StatCounter
-              key={index}
-              icon={stat.icon}
-              value={stat.value}
-              label={stat.label}
-              suffix={stat.suffix}
-              delay={index * 0.1}
-            />
-          ))}
-        </motion.div>
-      </motion.div>
+        {/* Desktop: 3-Col Sticky Grid */}
+        <div className="hidden md:grid grid-cols-12 gap-8 relative items-start">
+          {/* Left Column (Text for Evens) */}
+          <div className="col-span-4 flex flex-col pt-[20vh] pb-[20vh]">
+            {serviceItems.map((item, index) => {
+              if (index % 2 !== 0)
+                return <div key={item.id} className="h-[80vh]" />; // Spacer for right-side items
+              return (
+                <ServiceScrollItem
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  setActiveCard={setActiveCard}
+                  align="left"
+                />
+              );
+            })}
+          </div>
+
+          {/* Center Column (Sticky Image) */}
+          <div className="col-span-4 sticky top-24 h-[90vh] flex items-center justify-center z-0">
+            <div className="relative w-full aspect-[3/4] max-h-[700px] rounded-[3rem] overflow-hidden border border-white/10 bg-black shadow-2xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCard}
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0"
+                >
+                  {/* Real Image */}
+                  <Image
+                    src={serviceItems[activeCard].image}
+                    alt={serviceItems[activeCard].title}
+                    fill
+                    className="object-cover opacity-90"
+                  />
+
+                  {/* Subtle Gradient Overlay */}
+                  <div
+                    className={cn(
+                      "absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black/80",
+                    )}
+                  />
+
+                  {/* Central Content (Icon + Title overlay) */}
+                  <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-end p-8 text-center pb-16">
+                    <div
+                      className={cn(
+                        "w-20 h-20 rounded-full flex items-center justify-center mb-6 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl",
+                      )}
+                    >
+                      {React.createElement(serviceItems[activeCard].icon, {
+                        className: "w-10 h-10 text-white",
+                      })}
+                    </div>
+                    <h3 className="text-3xl font-bold mb-2 text-white drop-shadow-md">
+                      {serviceItems[activeCard].title}
+                    </h3>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Right Column (Text for Odds) */}
+          <div className="col-span-4 flex flex-col pt-[20vh] pb-[20vh]">
+            {serviceItems.map((item, index) => {
+              if (index % 2 === 0)
+                return <div key={item.id} className="h-[80vh]" />; // Spacer for left-side items
+              return (
+                <ServiceScrollItem
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  setActiveCard={setActiveCard}
+                  align="right"
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
 
-interface ServiceItemProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  variants: Variants;
-  delay: number;
-  direction: "left" | "right";
-}
-
-function ServiceItem({
-  icon,
-  title,
-  description,
-  variants,
-  delay,
-  direction,
-}: ServiceItemProps) {
-  return (
-    <motion.div
-      className={cn(
-        "flex flex-col group relative",
-        direction === "left"
-          ? "lg:items-end lg:text-right"
-          : "lg:items-start lg:text-left",
-        "items-center text-center",
-      )}
-      variants={variants}
-      transition={{ delay }}
-    >
-      <div
-        className={cn(
-          "flex items-center gap-4 mb-3",
-          direction === "left" ? "lg:flex-row-reverse" : "lg:flex-row",
-        )}
-      >
-        <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-purple-400 group-hover:text-white group-hover:bg-purple-600/20 transition-all duration-300">
-          {icon}
-        </div>
-        <h3 className="text-xl font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">
-          {title}
-        </h3>
-      </div>
-      <p className="text-neutral-500 text-sm leading-relaxed max-w-xs group-hover:text-neutral-300 transition-colors duration-300">
-        {description}
-      </p>
-    </motion.div>
-  );
-}
-
-interface StatCounterProps {
-  icon: React.ReactNode;
-  value: number;
-  label: string;
-  suffix: string;
-  delay: number;
-}
-
-function StatCounter({ icon, value, label, suffix, delay }: StatCounterProps) {
-  const countRef = useRef(null);
-  const isInView = useInView(countRef, { once: true }); // Animation only happens once
-
-  const springValue = useSpring(0, {
-    stiffness: 50,
-    damping: 10,
-  });
+// Move component outside to fix scope
+function ServiceScrollItem({
+  item,
+  index,
+  setActiveCard,
+  align,
+}: {
+  item: ServiceItem;
+  index: number;
+  setActiveCard: (idx: number) => void;
+  align: "left" | "right";
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
 
   useEffect(() => {
     if (isInView) {
-      springValue.set(value);
+      setActiveCard(index);
     }
-  }, [isInView, value, springValue]);
-
-  const displayValue = useTransform(springValue, (latest) =>
-    Math.floor(latest),
-  );
+  }, [isInView, index, setActiveCard]);
 
   return (
-    <motion.div
-      className="bg-white/5 border border-white/5 backdrop-blur-sm p-8 rounded-2xl flex flex-col items-center text-center group hover:bg-white/10 transition-colors duration-300"
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.6, delay },
-        },
-      }}
+    <div
+      ref={ref}
+      className={cn(
+        "h-[80vh] flex flex-col justify-center relative z-20",
+        align === "left" ? "text-left pr-8" : "text-left pl-8",
+      )}
     >
-      <div className="mb-4 text-neutral-500 group-hover:text-purple-400 transition-colors duration-300">
-        {React.cloneElement(
-          icon as React.ReactElement<{ size?: number; className?: string }>,
-          {
-            size: 32,
-          },
-        )}
-      </div>
-      <div
-        ref={countRef}
-        className="text-4xl font-bold text-white flex items-center mb-2"
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ margin: "-20%" }}
       >
-        <motion.span>{displayValue}</motion.span>
-        <span>{suffix}</span>
-      </div>
-      <p className="text-neutral-400 text-sm uppercase tracking-wider">
-        {label}
-      </p>
-    </motion.div>
+        <div className="md:hidden w-full h-48 relative mb-6 rounded-2xl overflow-hidden border border-white/10">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <h3 className="text-3xl font-bold mb-6 text-white leading-tight">
+          {item.title}
+        </h3>
+        <p className="text-lg text-neutral-400 leading-relaxed">
+          {item.description}
+        </p>
+      </motion.div>
+    </div>
   );
 }

@@ -6,6 +6,8 @@ import {
   FullScreenScrollFX,
 } from "@/components/ui/full-screen-scroll-fx";
 import { AboutUsSection } from "@/components/sections/AboutUs";
+import { AboutStory } from "@/components/sections/AboutStory";
+import { JourneyTimelineSection } from "@/components/sections/JourneyTimeline";
 
 const sections = [
   {
@@ -40,7 +42,9 @@ export default function AboutPage() {
   return (
     <div className="bg-black min-h-screen">
       <FullScreenScrollFX sections={sections} apiRef={apiRef} />
+      <AboutStory />
       <AboutUsSection />
+      <JourneyTimelineSection />
     </div>
   );
 }

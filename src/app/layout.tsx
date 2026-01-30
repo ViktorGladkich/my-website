@@ -3,6 +3,7 @@
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { CustomCursor } from "@/components/ui/custom-cursor";
+import { Footer } from "@/components/sections/Footer";
 
 export default function RootLayout({
   children,
@@ -22,6 +23,7 @@ export default function RootLayout({
         <CustomCursor />
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
