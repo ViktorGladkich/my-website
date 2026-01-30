@@ -3,13 +3,12 @@
 import React, { useRef } from "react";
 import {
   FullScreenScrollFX,
-  type Section,
   type FullScreenFXAPI,
 } from "@/components/ui/scroll-fullscreen";
-import { AboutUsSection } from "@/components/sections/AboutUs";
 import { AboutStory } from "@/components/sections/AboutStory";
 import { JourneyTimelineSection } from "@/components/sections/JourneyTimeline";
 import { TeamSection } from "@/components/sections/Team";
+import { CallToAction } from "@/components/sections/CallToAction";
 
 const sections = [
   {
@@ -45,9 +44,9 @@ export default function AboutPage() {
     <div className="bg-black min-h-screen">
       <FullScreenScrollFX sections={sections} apiRef={apiRef} />
       <AboutStory />
-      <AboutUsSection />
       <JourneyTimelineSection />
       <TeamSection />
+      <CallToAction />
     </div>
   );
 }

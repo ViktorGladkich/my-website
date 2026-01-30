@@ -148,7 +148,7 @@ export const HeroHeader = ({ isLoading }: { isLoading: boolean }) => {
         animate={isLoading ? { opacity: 0, y: 30 } : { opacity: 1, y: 0 }}
         transition={{
           duration: 0.8,
-          delay: 3.5,
+          delay: 1.5,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
       >
@@ -163,7 +163,7 @@ export const HeroHeader = ({ isLoading }: { isLoading: boolean }) => {
         animate={isLoading ? { opacity: 0, y: 30 } : { opacity: 1, y: 0 }}
         transition={{
           duration: 0.8,
-          delay: 3.8,
+          delay: 1.8,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
       >

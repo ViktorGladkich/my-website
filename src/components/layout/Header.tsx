@@ -1,22 +1,20 @@
 "use client";
 import {
   Navbar,
-  NavBody,
-  NavItems,
-  MobileNav,
   NavbarLogo,
-  NavbarButton,
-  MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/navbar";
 import { MenuVertical } from "@/components/ui/menu-vertical";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { useState } from "react";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export const Header = () => {
   const navItems = [
+    {
+      name: "HOME",
+      link: "/",
+    },
     {
       name: "LEISTUNGEN",
       link: "/services",
@@ -35,71 +33,71 @@ export const Header = () => {
     },
   ];
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="relative w-full z-50">
       <Navbar>
-        {/* Desktop Navigation */}
-        <NavBody>
-          <div className="flex items-center gap-4">
-            <NavbarLogo />
-          </div>
-          <NavItems items={navItems} />{" "}
-          {/* Centered automatically by flex-1 in NavItems */}
-          <div className="flex items-center gap-4">
-            <Link href="/contact" passHref>
-              <NavbarButton
-                variant="primary"
-                as="button"
-                className="bg-white text-black hover:bg-gray-100 shadow-[0_0_24px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04),0_0_4px_rgba(34,42,53,0.08),0_16px_68px_rgba(47,48,55,0.05),0_1px_0_rgba(255,255,255,0.1)_inset]"
-              >
-                Kontaktieren
-              </NavbarButton>
-            </Link>
-          </div>
-        </NavBody>
+        <div className="flex w-full items-center justify-between">
+          <NavbarLogo />
 
-        {/* Mobile Navigation */}
-        <MobileNav>
-          <MobileNavHeader>
-            <NavbarLogo />
+          <div className="flex items-center gap-3 p-1">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={cn(
+                "cursor-pointer hidden md:block text-sm font-medium tracking-widest text-black dark:text-white transition-opacity duration-300 hover:opacity-70",
+                isMenuOpen ? "opacity-0" : "opacity-100",
+              )}
+            >
+              MENU
+            </button>
             <MobileNavToggle
-              isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              isOpen={isMenuOpen}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
-          </MobileNavHeader>
+          </div>
+        </div>
 
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-          >
-            <div onClick={() => setIsMobileMenuOpen(false)}>
-              <MenuVertical
-                menuItems={navItems.map((i) => ({
-                  label: i.name,
-                  href: i.link,
-                }))}
-                color="#a855f7" // Purple-500 from gradient
-                className="w-full px-0 py-2"
-              />
-            </div>
-            <div className="flex w-full flex-col gap-4 mt-8 px-8 pb-4">
-              <Link href="/contact" className="w-full">
-                <HoverBorderGradient
-                  containerClassName="rounded-full w-full"
-                  as="button"
-                  className="bg-black text-white flex items-center justify-center space-x-2 px-8 py-4 w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
+        <MobileNavMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+          <div onClick={() => setIsMenuOpen(false)}>
+            <MenuVertical
+              menuItems={navItems.map((i) => ({
+                label: i.name,
+                href: i.link,
+              }))}
+              color="#a855f7"
+              className="w-full px-0 py-2"
+            />
+          </div>
+          <div className="w-full mt-12 px-10">
+            <div className="h-px w-full bg-white/10 mb-8" />
+            <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-neutral-400">
+              <div className="flex flex-col items-center md:items-start gap-2">
+                <span className="text-sm font-light tracking-widest uppercase text-neutral-500">
+                  Kontakt
+                </span>
+                <a
+                  href="mailto:hello@inverta.io"
+                  className="text-xl md:text-2xl text-white font-medium hover:text-purple-400 transition-colors"
                 >
-                  <span className="font-semibold text-lg uppercase tracking-widest">
-                    Kontaktieren
-                  </span>
-                </HoverBorderGradient>
-              </Link>
+                  hello@inverta.io
+                </a>
+              </div>
+
+              <div className="flex gap-6">
+                {["LinkedIn", "Instagram", "Behance"].map((social) => (
+                  <a
+                    key={social}
+                    href="#"
+                    className="text-sm uppercase tracking-widest hover:text-white transition-colors"
+                  >
+                    {social}
+                  </a>
+                ))}
+              </div>
             </div>
-          </MobileNavMenu>
-        </MobileNav>
+          </div>
+        </MobileNavMenu>
       </Navbar>
     </div>
   );

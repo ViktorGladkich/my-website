@@ -1,11 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
+  MotionConfig,
+  Variants,
 } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,7 +21,7 @@ interface NavbarProps {
 interface NavBodyProps {
   children: React.ReactNode;
   className?: string;
-  visible?: boolean;
+  // visible prop removed as it was unused
 }
 
 interface NavItemsProps {
@@ -51,11 +52,11 @@ interface MobileNavMenuProps {
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
-  const { scrollY } = useScroll(); // Use global window scroll
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState<boolean>(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const isScrolled = latest > 50; // Triggers slightly earlier for better feel
+    const isScrolled = latest > 50;
     if (isScrolled !== visible) {
       setVisible(isScrolled);
     }
@@ -64,58 +65,42 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   return (
     <motion.div
       className={cn(
-        "fixed inset-x-0 top-2 md:top-6 z-40 px-4 md:px-0",
+        "fixed inset-x-0 top-0 z-[5000] px-4 md:px-8 py-4 transition-all duration-300",
+        visible
+          ? "py-2 bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-sm"
+          : "bg-transparent",
         className,
       )}
     >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(
+      <div className="mx-auto max-w-7xl">
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement(child)) {
+            // Don't pass 'visible' prop to DOM elements (div, span, etc.)
+            if (typeof child.type === "string") {
+              return child;
+            }
+            return React.cloneElement(
               child as React.ReactElement<{ visible?: boolean }>,
               { visible },
-            )
-          : child,
-      )}
+            );
+          }
+          return child;
+        })}
+      </div>
     </motion.div>
   );
 };
 
-export const NavBody = ({ children, className, visible }: NavBodyProps) => {
+export const NavBody = ({ children, className }: NavBodyProps) => {
   return (
-    <motion.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "60%" : "100%",
-        y: 0,
-        height: visible ? "60px" : "60px",
-        borderRadius: "50px",
-      }}
-      initial={{
-        width: "100%",
-        y: 0,
-        borderRadius: "50px",
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 120, // Softer spring
-        damping: 20,
-        mass: 1,
-      }}
-      style={{
-        minWidth: visible ? "800px" : "100%",
-      }}
+    <div
       className={cn(
-        // Removed conflicting "transition-all duration-300 ease-in-out"
-        "relative z-60 mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start px-4 py-2 lg:flex",
-        visible && "bg-black/50 dark:bg-white/5",
+        "hidden flex-row items-center justify-between lg:flex",
         className,
       )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -123,10 +108,10 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <motion.div
+    <div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "hidden flex-1 flex-row items-center justify-center space-x-6 text-sm font-medium transition-colors lg:flex",
         className,
       )}
     >
@@ -134,50 +119,31 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         <Link
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 transition-colors hover:text-white"
+          className="cursor-pointer relative px-3 py-2 text-neutral-600 dark:text-neutral-300 transition-colors hover:text-black dark:hover:text-white"
           key={`link-${idx}`}
           href={item.link}
         >
           {hovered === idx && (
             <motion.div
-              layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-white/10"
+              layoutId="hovered-nav-item"
+              className="absolute inset-0 h-full w-full rounded-md bg-stone-100 dark:bg-stone-800/50 -z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             />
           )}
-          <span className="relative z-20">{item.name}</span>
+          <span className="relative z-10">{item.name}</span>
         </Link>
       ))}
-    </motion.div>
+    </div>
   );
 };
 
-export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
+export const MobileNav = ({ children, className }: MobileNavProps) => {
   return (
-    <motion.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: "2rem",
-        y: visible ? 20 : 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-      }}
-      className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-white/80 dark:bg-neutral-950/80",
-        className,
-      )}
-    >
+    <div className={cn("flex w-full flex-col lg:hidden", className)}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -203,46 +169,106 @@ export const MobileNavMenu = ({
   isOpen,
   onClose,
 }: MobileNavMenuProps) => {
-  const [mounted, setMounted] = useState(false);
+  // SSR-safe: only render portal on client
+  const isClient = typeof window !== "undefined";
 
   useEffect(() => {
-    // Wrap in timeout to avoid "synchronous setState in effect" lint/error
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!isClient) return;
 
-  if (!mounted) return null;
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleEscape);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose, isClient]);
+
+  if (!isClient) return null;
+
+  const menuVariants: Variants = {
+    closed: {
+      clipPath: "circle(0px at calc(100% - 40px) 40px)",
+      transition: {
+        type: "tween",
+        duration: 0.8,
+        ease: [0.19, 1, 0.22, 1],
+        delay: 0.1,
+      },
+    },
+    open: {
+      clipPath: "circle(150% at calc(100% - 40px) 40px)",
+      transition: {
+        type: "tween",
+        duration: 0.8,
+        ease: [0.19, 1, 0.22, 1], // Expo ease out for "WOW" smoothness
+      },
+    },
+  };
+
+  const contentVariants: Variants = {
+    closed: {
+      opacity: 0,
+      y: 20,
+      transition: {
+        duration: 0.2, // Fast exit
+      },
+    },
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.15,
+        duration: 0.6,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
+  };
 
   return createPortal(
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.3, ease: "circOut" }}
-          className={cn(
-            "fixed inset-0 z-50 flex h-dvh w-screen flex-col items-center justify-center overflow-hidden bg-black px-4 py-8",
-            className,
-          )}
-        >
-          {/* Close Button positioned absolutely top-right */}
-          <div className="absolute top-6 right-6 z-50">
-            <IconX
-              size={32}
-              className="text-white cursor-pointer hover:scale-110 transition-transform"
-              onClick={onClose}
-            />
-          </div>
+        <>
+          <motion.div
+            variants={menuVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            className={cn(
+              "fixed inset-0 z-[4000] flex h-dvh w-screen flex-col bg-neutral-950 text-white px-6 py-8 overflow-hidden",
+              className,
+            )}
+            style={{ originX: 1, originY: 0 }} // Anchor top right
+          >
+            {/* Background elements for texture */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-blue-900 via-neutral-950 to-neutral-950" />
 
-          {children}
-        </motion.div>
+            <motion.div
+              variants={contentVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="relative z-10 flex-1 flex flex-col pt-24 items-center justify-center text-center"
+            >
+              {children}
+            </motion.div>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>,
     document.body,
   );
 };
 
+// Refactored Toggle with Magnetic/Scale feel
 export const MobileNavToggle = ({
   isOpen,
   onClick,
@@ -250,14 +276,43 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => {
-  return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} size={32} />
-  ) : (
-    <IconMenu2
-      className="text-black dark:text-white"
+  return (
+    <motion.button
       onClick={onClick}
-      size={32}
-    />
+      whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.1 }}
+      className={cn(
+        "cursor-pointer relative z-5001 flex h-14 w-14 flex-col items-center justify-center gap-[6px] outline-none",
+        "bg-white/10 dark:bg-white/10 backdrop-blur-md rounded-full transition-colors duration-200 border border-white/10",
+        isOpen ? "bg-white text-black" : "text-black dark:text-white",
+      )}
+      aria-label={isOpen ? "Close Menu" : "Open Menu"}
+    >
+      <MotionConfig transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}>
+        <motion.span
+          className="h-[2px] w-6 rounded-full origin-center bg-current"
+          animate={
+            isOpen
+              ? { rotate: 45, y: 8, width: 24 }
+              : { rotate: 0, y: 0, width: 24 }
+          }
+        />
+        <motion.span
+          className="h-[2px] w-6 rounded-full origin-center bg-current"
+          animate={
+            isOpen ? { opacity: 0, width: 0 } : { opacity: 1, width: 16 }
+          }
+        />
+        <motion.span
+          className="h-[2px] w-6 rounded-full origin-center bg-current"
+          animate={
+            isOpen
+              ? { rotate: -45, y: -8, width: 24 }
+              : { rotate: 0, y: 0, width: 12 }
+          }
+        />
+      </MotionConfig>
+    </motion.button>
   );
 };
 
@@ -265,14 +320,14 @@ export const NavbarLogo = () => {
   return (
     <Link
       href="/"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="cursor-pointer relative z-20 flex items-center gap-2 font-bold text-xl tracking-tight text-black dark:text-white"
     >
       <Image
         src="/logo.png"
-        alt="INVERTA Logo"
+        alt="Logo"
         width={130}
         height={50}
-        className="h-15 md:h-15 w-auto object-contain"
+        className="h-13 w-auto object-contain"
         priority
       />
     </Link>
@@ -295,18 +350,17 @@ export const NavbarButton = ({
   [key: string]: unknown;
 }) => {
   const baseStyles =
-    "px-4 py-2 rounded-md text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "px-5 py-2.5 rounded-full text-sm font-medium relative cursor-pointer hover:scale-105 active:scale-95 transition-all duration-200 inline-block text-center";
 
   const variantStyles = {
     primary:
-      "bg-white text-black shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]",
-    secondary: "bg-transparent shadow-none text-white hover:bg-white/10",
-    dark: "bg-black text-white border border-white/20 shadow-sm",
+      "bg-black text-white dark:bg-white dark:text-black shadow-lg shadow-black/5",
+    secondary: "bg-transparent text-black dark:text-white hover:bg-black/5",
+    dark: "bg-neutral-900 text-white border border-neutral-800",
     gradient:
-      "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]",
+      "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md",
   };
 
-  // Use explicit any cast to avoid TypeScript issues with polymorphic components
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = (as || "a") as any;
 
