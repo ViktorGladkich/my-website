@@ -136,7 +136,7 @@ export function TeamSection() {
     <section className="bg-black py-24 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         {/* Header */}
-        <div className="mb-20 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-8">
+        <div className="mb-20 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -156,7 +156,7 @@ export function TeamSection() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-neutral-400 text-lg max-w-md leading-relaxed text-right md:text-left self-end"
+            className="text-neutral-400 text-lg max-w-md leading-relaxed text-left self-start md:self-end"
           >
             Wir sind Designer, Entwickler und Strategen. Aber vor allem sind wir
             Menschen, die Technologie lieben und Marken verstehen.
