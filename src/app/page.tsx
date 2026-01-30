@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Hero } from "@/components/sections/Hero";
-import { Preloader } from "@/components/ui/preloader";
+import { Preloader } from "@/components/ui/Preloader";
 import { Mission } from "@/components/sections/Mission";
 import { ProjectsParallax } from "@/components/sections/ProjectsParallax";
 import { Services } from "@/components/sections/Services";

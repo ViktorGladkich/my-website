@@ -17,19 +17,19 @@ const teamMembers: TeamMember[] = [
     id: "partner-1",
     name: "Viktor Gladkich",
     role: "GF-Gesellschafter",
-    image: "/images/team/member_1.jpg", // Bitte Bild austauschen
+    image: "/images/team/member_1.jpg",
   },
   {
     id: "partner-2",
     name: "Mansur",
     role: "GF-Gesellschafter",
-    image: "/images/team/member_2.jpeg", // Bitte Bild austauschen
+    image: "/images/team/member_2.jpeg", 
   },
   {
     id: "partner-3",
     name: "Ali",
     role: "GF-Gesellschafter",
-    image: "/images/team/member_3.jpeg", // Bitte Bild austauschen
+    image: "/images/team/member_3.jpeg", 
   },
   {
     id: "1",
