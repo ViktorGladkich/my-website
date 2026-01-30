@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { SpiralAnimation } from "@/components/ui/spiral-animation";
+import { SpiralAnimation } from "@/components/ui/preloader-spiral";
 
 export const Preloader = ({ onFinish }: { onFinish: () => void }) => {
   // Determine loading text based on progress

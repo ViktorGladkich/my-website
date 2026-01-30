@@ -3,7 +3,7 @@ import React from "react";
 import NextImage from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Marquee } from "@/components/ui/3d-testimonials";
+import { Marquee } from "@/components/ui/testimonials-3d";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 // Unique reviews data

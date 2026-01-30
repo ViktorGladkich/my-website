@@ -2,12 +2,14 @@
 
 import React, { useRef } from "react";
 import {
-  FullScreenFXAPI,
   FullScreenScrollFX,
-} from "@/components/ui/full-screen-scroll-fx";
+  type Section,
+  type FullScreenFXAPI,
+} from "@/components/ui/scroll-fullscreen";
 import { AboutUsSection } from "@/components/sections/AboutUs";
 import { AboutStory } from "@/components/sections/AboutStory";
 import { JourneyTimelineSection } from "@/components/sections/JourneyTimeline";
+import { TeamSection } from "@/components/sections/Team";
 
 const sections = [
   {
@@ -45,6 +47,7 @@ export default function AboutPage() {
       <AboutStory />
       <AboutUsSection />
       <JourneyTimelineSection />
+      <TeamSection />
     </div>
   );
 }

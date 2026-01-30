@@ -38,7 +38,7 @@ const timelineData: TimelineItem[] = [
     title: "High-End Webentwicklung",
     description:
       "Fokus auf modernste Webtechnologien. Wir entwickeln performante, skalierbare und visuell beeindruckende Plattformen.",
-    image: "/images/services/service_web_real.png",
+    image: "/images/services/service_web_design.png",
   },
   {
     id: "4",
@@ -46,7 +46,7 @@ const timelineData: TimelineItem[] = [
     title: "Digital Marketing Expansion",
     description:
       "Integration datengetriebener Marketing-Strategien für maximales Wachstum und Sichtbarkeit unserer Kunden.",
-    image: "/images/services/marketing.png",
+    image: "/images/services/service_seo_analytics.png",
   },
   {
     id: "5",
@@ -70,8 +70,8 @@ export function JourneyTimelineSection() {
       ref={containerRef}
       className="w-full py-24 bg-black text-white relative overflow-hidden"
     >
-      {/* Background Ambience */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/10 blur-3xl pointer-events-none" />
+      {/* Background Ambience - Optimized for mobile: hidden on small screens */}
+      <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/10 blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-24">
@@ -86,7 +86,7 @@ export function JourneyTimelineSection() {
             UNSERE REISE
           </motion.span>
           <motion.h2
-            className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60"
+            className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-white/60"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -100,9 +100,9 @@ export function JourneyTimelineSection() {
           {/* Vertical Line - Background */}
           <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 transform -translate-x-1/2" />
 
-          {/* Animated Progress Line */}
+          {/* Animated Progress Line - Hardware Accelerated */}
           <motion.div
-            className="absolute left-8 md:left-1/2 top-0 w-0.5 bg-gradient-to-b from-purple-500 to-blue-500 transform -translate-x-1/2 origin-top"
+            className="absolute left-8 md:left-1/2 top-0 w-0.5 bg-linear-to-b from-purple-500 to-blue-500 transform -translate-x-1/2 origin-top will-change-transform"
             style={{
               height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]),
             }}
@@ -137,7 +137,7 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
           isEve ? "justify-end pr-16" : "justify-start pl-16",
         )}
       >
-        <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+        <span className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-purple-400 to-blue-400">
           {item.date}
         </span>
       </div>
@@ -157,12 +157,13 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
           isEve ? "md:pl-16" : "md:pr-16",
         )}
       >
+        {/* Simplified animation for better mobile performance */}
         <motion.div
-          initial={{ opacity: 0, x: isEve ? 50 : -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ margin: "-20%" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="group relative"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ margin: "-10%", once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="group relative will-change-transform"
         >
           <div className="mb-6">
             <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white group-hover:text-purple-300 transition-colors">
@@ -178,10 +179,11 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
               src={item.image}
               alt={item.title}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
             />
             {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
           </div>
         </motion.div>
       </div>

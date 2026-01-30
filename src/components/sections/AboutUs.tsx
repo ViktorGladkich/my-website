@@ -37,7 +37,7 @@ const serviceItems: ServiceItem[] = [
     category: "web",
     icon: LayoutTemplate,
     gradient: "from-purple-500 to-indigo-600",
-    image: "/images/services/service_web_real.png",
+    image: "/images/services/service_web_design.png",
   },
   {
     id: "4",
@@ -47,7 +47,7 @@ const serviceItems: ServiceItem[] = [
     category: "marketing",
     icon: Search,
     gradient: "from-orange-400 to-red-500",
-    image: "/images/services/service_seo_real_placeholder.png",
+    image: "/images/services/service_seo_analytics.png",
   },
   {
     id: "2",
@@ -57,7 +57,7 @@ const serviceItems: ServiceItem[] = [
     category: "web",
     icon: Terminal,
     gradient: "from-blue-400 to-cyan-500",
-    image: "/images/services/service_coding_real.png",
+    image: "/images/services/service_coding_dev.png",
   },
   {
     id: "5",
@@ -67,7 +67,7 @@ const serviceItems: ServiceItem[] = [
     category: "marketing",
     icon: Share2,
     gradient: "from-pink-500 to-rose-500",
-    image: "/images/services/service_social_real_placeholder.png",
+    image: "/images/services/service_social_media.png",
   },
   {
     id: "6",
@@ -77,7 +77,7 @@ const serviceItems: ServiceItem[] = [
     category: "web",
     icon: Gauge,
     gradient: "from-emerald-400 to-green-600",
-    image: "/images/services/service_performance_real_placeholder.png",
+    image: "/images/services/service_performance.png",
   },
   {
     id: "3",
@@ -87,7 +87,7 @@ const serviceItems: ServiceItem[] = [
     category: "marketing",
     icon: Rocket,
     gradient: "from-amber-400 to-orange-600",
-    image: "/images/services/service_relaunch_real_placeholder.jpg",
+    image: "/images/services/service_strategy_funnel.png",
   },
 ];
 

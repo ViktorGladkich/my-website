@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Hero } from "@/components/sections/Hero";
-import { Preloader } from "@/components/ui/Preloader";
+import { Preloader } from "@/components/ui/preloader";
 import { Mission } from "@/components/sections/Mission";
 import { ProjectsParallax } from "@/components/sections/ProjectsParallax";
 import { Services } from "@/components/sections/Services";
-import { Footer } from "@/components/sections/Footer";
+
 import { BrandMarquee } from "@/components/sections/BrandMarquee";
 import { AboutStory } from "@/components/sections/AboutStory";
 import { Testimonials3D } from "@/components/sections/Testimonials";
@@ -31,7 +31,6 @@ export default function Page() {
         <AboutStory />
         <Testimonials3D />
         <CallToAction />
-        <Footer />
       </main>
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { CardsParallax, type CardItem } from "@/components/ui/scroll-cards";
+import { CardsParallax, type CardItem } from "@/components/ui/cards-parallax";
 
 const projectItems: CardItem[] = [
   {

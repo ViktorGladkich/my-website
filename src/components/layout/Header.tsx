@@ -9,7 +9,7 @@ import {
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
-} from "@/components/ui/resizable-navbar";
+} from "@/components/ui/navbar";
 import { MenuVertical } from "@/components/ui/menu-vertical";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { useState } from "react";
